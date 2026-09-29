@@ -12,7 +12,7 @@ export default function FinalCTASection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="relative w-full rounded-[32px] overflow-hidden p-6 lg:p-10 flex flex-col justify-end min-h-[500px] lg:min-h-[640px] shadow-sm border border-gray-100"
+          className="relative w-full rounded-[6px] overflow-hidden p-6 lg:p-10 flex flex-col justify-end min-h-[500px] lg:min-h-[640px] shadow-sm border border-gray-100"
         >
           
           {/* Background Image (Using the new creation image) */}
@@ -27,7 +27,7 @@ export default function FinalCTASection() {
           </div>
 
           {/* Glassmorphic Panel (The Call to Action Area) positioned at the bottom */}
-          <div className="relative z-10 w-full bg-black/[0.35] backdrop-blur-md rounded-[24px] p-8 lg:p-14 shadow-[0_8px_32px_rgb(0,0,0,0.2)]">
+          <div className="relative z-10 w-full bg-black/[0.35] backdrop-blur-md rounded-[6px] p-8 lg:p-14 shadow-[0_8px_32px_rgb(0,0,0,0.2)]">
             
             {/* Eyebrow */}
             <p className="text-[#60A5FA] text-[12px] lg:text-[13px] font-bold tracking-[0.1em] uppercase mb-5">

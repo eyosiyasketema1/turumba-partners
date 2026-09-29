@@ -52,7 +52,7 @@ export default function TogetherSection() {
             return (
               <motion.div 
                 key={i}
-                className="group relative w-full h-[420px] rounded-[32px] overflow-hidden bg-gray-50 flex flex-col justify-end p-3 cursor-pointer shadow-sm border border-gray-100"
+                className="group relative w-full h-[420px] rounded-[6px] overflow-hidden bg-gray-50 flex flex-col justify-end p-3 cursor-pointer border border-gray-100"
                 initial="hidden"
                 whileInView="visible"
                 whileHover="hover"
@@ -127,7 +127,7 @@ export default function TogetherSection() {
 
                 {/* Floating Text Card */}
                 <motion.div 
-                  className="relative z-20 w-full bg-white/95 backdrop-blur-sm rounded-[24px] p-6 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/60"
+                  className="relative z-20 w-full bg-white/95 backdrop-blur-sm rounded-[6px] p-6 lg:p-8 border border-white/60"
                   variants={{
                     hidden: { y: 0 },
                     visible: { y: 0 },

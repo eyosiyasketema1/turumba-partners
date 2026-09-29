@@ -81,7 +81,7 @@ export default function WaitingListSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`relative w-full h-[320px] rounded-[24px] p-8 flex flex-col justify-between overflow-hidden ${card.isBlue ? '' : 'bg-[#F4F4F4]'}`}
+              className={`relative w-full h-[320px] rounded-[6px] p-8 flex flex-col justify-between overflow-hidden ${card.isBlue ? '' : 'bg-[#F4F4F4]'}`}
             >
               {card.isBlue && (
                 <>

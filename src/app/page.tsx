@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Gift, ArrowUpRight } from "lucide-react";
@@ -11,7 +10,6 @@ import CTASection from "@/components/CTASection";
 import WaitingListSection from "@/components/WaitingListSection";
 import TogetherSection from "@/components/TogetherSection";
 import FinalCTASection from "@/components/FinalCTASection";
-import Footer from "@/components/Footer";
 import WaitingListModal from "@/components/WaitingListModal";
 
 export default function Home() {
@@ -27,7 +25,6 @@ export default function Home() {
 
   return (
     <div className="bg-[#0a0a0a]">
-      <Navbar />
 
       {/* Hero Section Container: Cropped to max 115vh to reveal a bit more of the image */}
       <div 
@@ -46,10 +43,11 @@ export default function Home() {
           />
           
           {/* Overlay to ensure text readability */}
-          <div className="absolute inset-0 bg-[#000000] opacity-30 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-black/20" />
           
           {/* Crossing Grid Lines Overlay */}
           <div className="absolute inset-0 pointer-events-none z-10">
+
             {/* Vertical Line: Animates from Top to bottom */}
             <motion.div 
               initial={{ height: "0%" }}
@@ -186,7 +184,6 @@ export default function Home() {
       <FinalCTASection />
       
       {/* Footer */}
-      <Footer />
       
       {/* Global Modals */}
       <WaitingListModal />

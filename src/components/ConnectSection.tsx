@@ -57,7 +57,7 @@ function Card({ text, className = "", index = 0 }: { text: string; className?: s
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className={`bg-[#EFEFEF] rounded-[14px] h-[126px] px-8 flex items-center gap-4 ${className}`}
+      className={`bg-[#EFEFEF] rounded-[6px] h-[126px] px-8 flex items-center gap-4 ${className}`}
     >
       <div className="w-4 h-4 rounded-full bg-gradient-to-l from-[#2563EB] to-[#20A9E1] shrink-0" />
       <span className="text-[17px] font-semibold text-gray-800 leading-snug">
