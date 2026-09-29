@@ -28,18 +28,17 @@ export default function CobeGlobe({ className = "" }: { className?: string }) {
         { location: [37.78, -122.44], size: 0.05 }, // sf
         { location: [40.71, -74.01], size: 0.05 }, // nyc
       ],
-      // @ts-expect-error - passing these in case cobe supports them now
       arcs: [
         { from: [37.78, -122.44], to: [40.71, -74.01] },
       ],
       arcColor: [0.3, 0.5, 1],
       arcWidth: 0.5,
       arcHeight: 0.3,
-      onRender: (state) => {
+      onRender: (state: any) => {
         state.phi = phi;
         phi += 0.005;
       },
-    });
+    } as any);
 
     return () => {
       globe.destroy();
