@@ -28,7 +28,7 @@ export default function CobeGlobe({ className = "" }: { className?: string }) {
         { location: [37.78, -122.44], size: 0.05 }, // sf
         { location: [40.71, -74.01], size: 0.05 }, // nyc
       ],
-      // @ts-ignore - passing these in case cobe supports them now
+      // @ts-expect-error - passing these in case cobe supports them now
       arcs: [
         { from: [37.78, -122.44], to: [40.71, -74.01] },
       ],

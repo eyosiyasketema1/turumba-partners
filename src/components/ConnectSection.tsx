@@ -21,7 +21,7 @@ export default function ConnectSection() {
             connect with
           </h2>
           <p className="text-[20px] leading-[130%] tracking-[-0.01em] text-[#626262] font-medium max-w-[563px] lg:mt-4">
-            We especially want to hear from organizations wrestling with communication, follow-up, discipleship, engagement, content delivery, or collaboration. You don't need the answers. If you see the need for better digital infrastructure, build it with us.
+            We especially want to hear from organizations wrestling with communication, follow-up, discipleship, engagement, content delivery, or collaboration. You don&apos;t need the answers. If you see the need for better digital infrastructure, build it with us.
           </p>
         </motion.div>
 

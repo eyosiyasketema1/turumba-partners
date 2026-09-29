@@ -36,7 +36,7 @@ export default function FinalCTASection() {
 
             {/* Headline */}
             <h2 className="text-[40px] lg:text-[56px] leading-[1.05] tracking-[-0.03em] font-medium text-white max-w-3xl mb-6">
-              Let's Build What Comes Next. Together.
+              Let&apos;s Build What Comes Next. Together.
             </h2>
 
             {/* Subtitle */}
@@ -72,7 +72,7 @@ export default function FinalCTASection() {
                 </svg>
               </button>
               <p className="text-[14px] text-gray-400 max-w-[280px] leading-snug">
-                Tell us who you are, what you're working on, and how you would like to be involved.
+                Tell us who you are, what you&apos;re working on, and how you would like to be involved.
               </p>
             </div>
 
