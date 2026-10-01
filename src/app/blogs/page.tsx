@@ -138,10 +138,10 @@ export default function BlogsPage() {
             ];
             
             const aspectClasses = [
-              "aspect-[16/9] lg:aspect-[2/1]", // Wide
+              "aspect-[16/9] lg:aspect-auto lg:flex-1 lg:min-h-[280px]", // Wide: grows to match the taller neighbour
               "aspect-[4/5] lg:aspect-[3/4]",  // Tall
               "aspect-[4/5] lg:aspect-[3/4]",  // Tall
-              "aspect-[16/9] lg:aspect-[2/1]", // Wide
+              "aspect-[16/9] lg:aspect-auto lg:flex-1 lg:min-h-[280px]", // Wide: grows to match the taller neighbour
               "aspect-[4/3]",                  // Standard
               "aspect-[4/3]"                   // Standard
             ];
@@ -158,7 +158,7 @@ export default function BlogsPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={`group flex flex-col ${gridClass}`}
               >
-                <Link href={`/blogs/${post.id}`} className="flex flex-col h-full">
+                <Link href={`/blogs/${post.id}`} className="flex flex-col flex-1">
                   {/* Sharp Image Container */}
                   <div className={`relative w-full ${aspectClass} rounded-[6px] overflow-hidden bg-gray-200 mb-6`}>
                     <Image
