@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Gift, ArrowUpRight } from "lucide-react";
 
+import CobeGlobe from "@/components/CobeGlobe";
 import ConnectSection from "@/components/ConnectSection";
 import CTASection from "@/components/CTASection";
 import WaitingListSection from "@/components/WaitingListSection";
@@ -34,44 +34,11 @@ export default function Home() {
         
         {/* The Image Container: Normal scrolling */}
         <div className="absolute inset-0 z-0 h-full max-h-[115vh]">
-          <Image
-            src="/hero-bg-2.png"
-            alt="Hero Background"
-            fill
-            className="object-cover"
-            priority
-          />
-          
-          {/* Overlay to ensure text readability */}
-          <div className="absolute inset-0 bg-black/20" />
+          {/* Solid dark background (replaces the hero image) */}
+          <div className="absolute inset-0 bg-[#020203]" />
           
           {/* Crossing Grid Lines Overlay */}
           <div className="absolute inset-0 pointer-events-none z-10">
-
-            {/* Vertical Line: Animates from Top to bottom */}
-            <motion.div 
-              initial={{ height: "0%" }}
-              animate={{ height: "100%" }}
-              transition={{ delay: 1.5, duration: 1.5, ease: "easeInOut" }}
-              className="absolute top-0 right-[15%] w-[1.5px] bg-white/30 origin-top" 
-            />
-            
-            {/* Horizontal Line: Animates from Left to right */}
-            <motion.div 
-              initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{ delay: 2.0, duration: 1.5, ease: "easeInOut" }}
-              className="absolute left-0 bottom-[20%] h-[1.5px] bg-white/30 origin-left" 
-            />
-            
-            {/* Filled circle that smoothly appears when they cross */}
-            <motion.div 
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 3.2, duration: 0.4, ease: "easeOut" }}
-              className="absolute right-[15%] bottom-[20%] w-[24px] h-[24px] bg-white rounded-full"
-              style={{ marginRight: "-11.5px", marginBottom: "-11.5px" }}
-            />
 
             {/* Text below horizontal line */}
             <motion.div
@@ -85,12 +52,22 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Cobe Globe: right side of the hero, behind the text */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.8, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+          className="hidden lg:block absolute z-[5] top-1/2 -translate-y-1/2 right-[-10%] w-[62%] aspect-square"
+        >
+          <CobeGlobe className="w-full h-full" />
+        </motion.div>
+
         {/* The Parallax Text */}
         <motion.main 
           style={{ y: textY }}
           className="flex-1 relative z-10 flex flex-col justify-center px-12 max-w-[1440px] mx-auto w-full h-full pointer-events-none"
         >
-          <div className="text-left w-full pointer-events-auto flex flex-col items-start">
+          <div className="text-left w-fit max-w-full pointer-events-auto flex flex-col items-start">
             
             {/* Pill */}
             <div className="overflow-hidden mb-[52px]">

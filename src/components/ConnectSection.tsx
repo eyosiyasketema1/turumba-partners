@@ -26,7 +26,7 @@ export default function ConnectSection() {
         </motion.div>
 
         {/* Grid Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-l border-[#E6E6E6]">
           
           {/* Row 1 */}
           <Card index={0} text="AI and data experts" />
@@ -44,6 +44,22 @@ export default function ConnectSection() {
           <Card index={8} text="Mentors and follow-up teams" />
           <Card index={9} text="Technology partners and developers" />
 
+          {/* Circles on the inner grid intersections plus the four outer corners */}
+          {[
+            ...[125.5, 251.5].flatMap((top) => [25, 50, 75].map((left) => ({ left, top }))),
+            { left: 0, top: -0.5 },
+            { left: 100, top: -0.5 },
+            { left: 0, top: 377.5 },
+            { left: 100, top: 377.5 },
+          ].map(({ left, top }) => (
+            <span
+              key={`${left}-${top}`}
+              aria-hidden="true"
+              className="pointer-events-none absolute z-10 hidden lg:block w-[9px] h-[9px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C2C2C2]"
+              style={{ left: `calc(${left}% - 0.5px)`, top }}
+            />
+          ))}
+
         </div>
       </div>
     </section>
@@ -57,7 +73,7 @@ function Card({ text, className = "", index = 0 }: { text: string; className?: s
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className={`bg-[#EFEFEF] rounded-[6px] h-[126px] px-8 flex items-center gap-4 ${className}`}
+      className={`relative border-r border-b border-[#E6E6E6] h-[126px] px-8 flex items-center gap-4 ${className}`}
     >
       <div className="w-4 h-4 rounded-full bg-gradient-to-l from-[#2563EB] to-[#20A9E1] shrink-0" />
       <span className="text-[17px] font-semibold text-gray-800 leading-snug">
