@@ -114,12 +114,12 @@ export default function CobeGlobe({ className = "" }: { className?: string }) {
       diffuse: 1.2,
       mapSamples: 30000,
       mapBrightness: 5,
-      baseColor: [0.3, 0.3, 0.3],
-      markerColor: [0.2, 0.4, 1],
-      glowColor: [0.1, 0.1, 0.2],
+      baseColor: [0.3, 0.32, 0.36],
+      markerColor: [21 / 255, 101 / 255, 192 / 255] /* brand primary */,
+      glowColor: [0.03, 0.12, 0.24],
       markers: baseMarkers,
       arcs: [],
-      arcColor: [0.3, 0.5, 1],
+      arcColor: [21 / 255, 101 / 255, 192 / 255],
       arcWidth: 0.4,
       arcHeight: 0.3,
     });
@@ -205,10 +205,10 @@ export default function CobeGlobe({ className = "" }: { className?: string }) {
             className="bg-white p-[6px] pb-[22px] shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
             style={{ transform: `rotate(${p.rotate}deg)`, width: 84 }}
           >
-            <div className="relative w-full aspect-square bg-neutral-300 overflow-hidden">
+            <div className="relative w-full aspect-square bg-[#C7C7C7] overflow-hidden">
               <Image src={p.src} alt="" fill sizes="84px" className="object-cover" />
             </div>
-            <div className="mt-[5px] text-center text-[9px] leading-none font-medium text-neutral-700 tracking-wide">
+            <div className="mt-[5px] text-center text-[9px] leading-none font-medium text-[#363636] tracking-wide">
               {p.caption}
             </div>
           </div>

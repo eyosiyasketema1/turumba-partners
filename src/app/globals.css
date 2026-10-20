@@ -1,13 +1,39 @@
 @import "tailwindcss";
 
+/* Turumba brand tokens — from the Turumba Brand Bible v2.0 (public/brand/turumba-tokens.json).
+   Usable as Tailwind utilities, e.g. bg-ocean, text-ocean-700, border-neutral-brand-200. */
+@theme {
+  --color-ocean: #1565c0;          /* Blue Ocean — mandatory brand blue, logo color */
+  --color-ocean-50: #e7eff9;
+  --color-ocean-100: #cfdff2;
+  --color-ocean-200: #b8d0ec;
+  --color-ocean-300: #a1c1e6;
+  --color-ocean-400: #72a2d9;
+  --color-ocean-500: #4484cd;
+  --color-ocean-600: #1565c0;
+  --color-ocean-700: #11519a;
+  --color-ocean-800: #0d3d73;
+  --color-ocean-900: #08284d;
+  --color-ocean-950: #041426;
+  --color-prussian: #1c4bd1;       /* Prussian Blue */
+  --color-indigo-brand: #371cd1;   /* Indigo Blue */
+  --color-cyan-brand: #03ffff;     /* accent — large text only on light grounds */
+  --color-amber-brand: #fdba00;    /* Amber Flame — accent */
+  --color-ink: #1a1a1a;            /* neutrals */
+  --color-body: #363636;
+  --color-muted: #707070;
+  --color-line: #e5e5e5;
+  --color-ground: #f7f7f7;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1a1a1a;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #041426;
     --foreground: #ededed;
   }
 }
@@ -17,6 +43,11 @@ body {
   color: var(--foreground);
 }
 
+/* DM Sans is the brand's primary typeface for everything */
 * {
-  font-family: 'Urbanist', sans-serif !important;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+::selection {
+  background: rgba(21, 101, 192, 0.22);
 }

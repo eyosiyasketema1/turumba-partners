@@ -41,7 +41,7 @@ export default function TogetherSection() {
         
         {/* Header */}
         <div className="flex flex-col mb-12 lg:mb-16">
-          <h2 className="text-[64px] leading-[1.1] pb-2 tracking-[-0.03em] font-medium bg-gradient-to-l from-[#2563EB] to-[#20A9E1] text-transparent bg-clip-text">
+          <h2 className="text-[64px] leading-[1.1] pb-2 tracking-[-0.03em] font-medium bg-gradient-to-l from-[#1565C0] to-[#371CD1] text-transparent bg-clip-text">
             Together, we can move
           </h2>
         </div>
@@ -52,7 +52,7 @@ export default function TogetherSection() {
             return (
               <motion.div 
                 key={i}
-                className="group relative w-full h-[420px] rounded-[6px] overflow-hidden bg-gray-50 flex flex-col justify-end p-3 cursor-pointer border border-gray-100"
+                className="group relative w-full h-[420px] rounded-[6px] overflow-hidden bg-[#F7F7F7] flex flex-col justify-end p-3 cursor-pointer border border-[#EEEEEE]"
                 initial="hidden"
                 whileInView="visible"
                 whileHover="hover"
@@ -138,9 +138,9 @@ export default function TogetherSection() {
                   <motion.p 
                     className="text-[14px] lg:text-[15px] mb-2"
                     variants={{
-                      hidden: { color: "#A1A1AA", fontWeight: 500 },
-                      visible: { color: "#A1A1AA", fontWeight: 500 },
-                      hover: { color: "#0F172A", fontWeight: 700 }
+                      hidden: { color: "#8F8F8F", fontWeight: 500 },
+                      visible: { color: "#8F8F8F", fontWeight: 500 },
+                      hover: { color: "#1A1A1A", fontWeight: 700 }
                     }}
                   >
                     {item.from}
@@ -148,9 +148,9 @@ export default function TogetherSection() {
                   <motion.p 
                     className="text-[18px] lg:text-[20px] leading-[1.3] tracking-[-0.01em]"
                     variants={{
-                      hidden: { color: "#2563EB", fontWeight: 700 },
-                      visible: { color: "#2563EB", fontWeight: 700 },
-                      hover: { color: "#94A3B8", fontWeight: 500 }
+                      hidden: { color: "#1565C0", fontWeight: 700 },
+                      visible: { color: "#1565C0", fontWeight: 700 },
+                      hover: { color: "#8F8F8F", fontWeight: 500 }
                     }}
                   >
                     {item.to}

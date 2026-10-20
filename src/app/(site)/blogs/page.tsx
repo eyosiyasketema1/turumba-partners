@@ -13,7 +13,7 @@ export default function BlogsPage() {
   const otherPosts = BLOG_POSTS.slice(1);
 
   return (
-    <div className="bg-[#F8F9FA] min-h-screen text-[#0F172A] flex flex-col">
+    <div className="bg-[#F7F7F7] min-h-screen text-[#1A1A1A] flex flex-col">
 
       {/* Spacer for fixed navbar */}
       <div className="pt-32 pb-16 px-6 md:px-12 max-w-[1440px] mx-auto w-full flex-grow">
@@ -34,10 +34,10 @@ export default function BlogsPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="max-w-xs md:pb-3"
           >
-            <p className="text-gray-600 text-[15px] font-light mb-4">
+            <p className="text-[#707070] text-[15px] font-light mb-4">
               Thoughts, stories, and ideas on digital infrastructure, messaging, and building the future of ministry technology.
             </p>
-            <Link href="#other-articles" className="inline-flex items-center gap-2 text-[13px] font-medium text-gray-800 hover:text-black transition-colors border-b border-gray-300 pb-1 uppercase tracking-wider">
+            <Link href="#other-articles" className="inline-flex items-center gap-2 text-[13px] font-medium text-[#2B2A2A] hover:text-black transition-colors border-b border-[#C7C7C7] pb-1 uppercase tracking-wider">
               Explore Articles <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </motion.div>
@@ -67,23 +67,23 @@ export default function BlogsPage() {
               
               {/* Left Side: Title & Meta */}
               <div className="md:col-span-7 flex flex-col pr-0 md:pr-12">
-                <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-gray-500 font-medium mb-6">
-                  <span className="w-2 h-2 rounded-full bg-[#2563EB]"></span>
+                <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-[#707070] font-medium mb-6">
+                  <span className="w-2 h-2 rounded-full bg-[#1565C0]"></span>
                   {featuredPost.category}
                 </div>
-                <h2 className="text-4xl md:text-5xl lg:text-[56px] leading-[1.1] font-medium tracking-tight mb-6 text-black group-hover:text-[#2563EB] transition-colors">
+                <h2 className="text-4xl md:text-5xl lg:text-[56px] leading-[1.1] font-medium tracking-tight mb-6 text-black group-hover:text-[#1565C0] transition-colors">
                   {featuredPost.title}
                 </h2>
               </div>
               
               {/* Right Side: Excerpt & CTA */}
               <div className="md:col-span-5 flex flex-col md:pt-10">
-                <p className="text-gray-600 text-lg font-light leading-relaxed mb-8">
+                <p className="text-[#707070] text-lg font-light leading-relaxed mb-8">
                   {featuredPost.excerpt}
                 </p>
                 
                 {/* Meta details (Dates & Writer) */}
-                <div className="flex items-center gap-6 text-sm text-gray-500 font-light mb-8">
+                <div className="flex items-center gap-6 text-sm text-[#707070] font-light mb-8">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
                     <span>{featuredPost.date}</span>
@@ -94,7 +94,7 @@ export default function BlogsPage() {
                   </div>
                 </div>
 
-                <div className="inline-flex items-center gap-3 text-[15px] font-medium text-black hover:text-[#2563EB] transition-colors uppercase tracking-wider">
+                <div className="inline-flex items-center gap-3 text-[15px] font-medium text-black hover:text-[#1565C0] transition-colors uppercase tracking-wider">
                   Read full article <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
@@ -114,7 +114,7 @@ export default function BlogsPage() {
         {/* Filters */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 text-[11px] font-bold uppercase tracking-widest text-black gap-6">
           <div className="flex items-center gap-4 flex-wrap">
-            <span className="text-gray-500">Filter by category:</span>
+            <span className="text-[#707070]">Filter by category:</span>
             <div className="flex gap-2 flex-wrap">
               <button className="bg-black text-white px-4 py-1.5 rounded-full">All</button>
               <button className="border border-black/20 px-4 py-1.5 rounded-full hover:border-black transition-colors">Infrastructure</button>
@@ -160,7 +160,7 @@ export default function BlogsPage() {
               >
                 <Link href={`/blogs/${post.id}`} className="flex flex-col flex-1">
                   {/* Sharp Image Container */}
-                  <div className={`relative w-full ${aspectClass} rounded-[6px] overflow-hidden bg-gray-200 mb-6`}>
+                  <div className={`relative w-full ${aspectClass} rounded-[6px] overflow-hidden bg-[#E5E5E5] mb-6`}>
                     <Image
                       src={post.imageUrl}
                       alt={post.title}
@@ -172,26 +172,26 @@ export default function BlogsPage() {
                   {/* Content */}
                   <div className="flex flex-col">
                     {/* Meta Data */}
-                    <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">
+                    <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#707070] mb-3">
                       <span>{post.date}</span>
-                      <span className="text-gray-300">/</span>
+                      <span className="text-[#C7C7C7]">/</span>
                       <span className="border border-black/20 px-2 py-0.5 rounded-full text-black">
                         {post.category}
                       </span>
                     </div>
 
                     {/* Title (Super bold, tight tracking like reference) */}
-                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-black uppercase tracking-tight leading-[1.1] mb-4 group-hover:text-[#2563EB] transition-colors">
+                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-black uppercase tracking-tight leading-[1.1] mb-4 group-hover:text-[#1565C0] transition-colors">
                       {post.title}
                     </h3>
                     
                     {/* Excerpt */}
-                    <p className="text-gray-600 text-[15px] font-light line-clamp-2 mb-4 leading-relaxed max-w-xl">
+                    <p className="text-[#707070] text-[15px] font-light line-clamp-2 mb-4 leading-relaxed max-w-xl">
                       {post.excerpt}
                     </p>
 
                     {/* CTA Link */}
-                    <div className="inline-flex items-center gap-2 text-[#2563EB] font-bold text-[11px] uppercase tracking-widest group-hover:translate-x-1 transition-transform w-fit">
+                    <div className="inline-flex items-center gap-2 text-[#1565C0] font-bold text-[11px] uppercase tracking-widest group-hover:translate-x-1 transition-transform w-fit">
                       Read article <ArrowRight className="w-3.5 h-3.5" />
                     </div>
                   </div>

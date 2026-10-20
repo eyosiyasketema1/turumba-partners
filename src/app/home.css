@@ -1,0 +1,136 @@
+/* Turumba Landing (home page, "/") — ported from Claude Design "Turumba Landing.dc.html".
+   Everything is scoped under .turumba-home so the partners page and blog keep their Urbanist styling. */
+
+.turumba-home {
+  --font-sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --primary: #1565c0;
+  --foreground: #1a1a1a;
+  --muted-foreground: #64748b;
+  --border: #e5e5e5;
+  background: #ffffff;
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  /* same page margins as the blog and partners pages: 48px sides, content capped at 1440px */
+  --th-gutter: max(48px, calc((100% - 1440px) / 2 + 48px));
+}
+@media (max-width: 767px) {
+  .turumba-home { --th-gutter: 24px; }
+}
+/* beats the global `* { font-family: Urbanist !important }` rule */
+.turumba-home,
+.turumba-home * {
+  font-family: var(--font-sans) !important;
+}
+.turumba-home ::selection { background: rgba(21, 101, 192, 0.25); }
+.turumba-home a { color: #1565c0; text-decoration: none; }
+.turumba-home a:hover { color: #11519a; }
+.turumba-home p { text-wrap: pretty; }
+.turumba-home section[id] { scroll-margin-top: 12px; }
+html:has(.turumba-home) { scroll-behavior: smooth; }
+
+@keyframes tv-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+.th-rise { animation: tv-rise 0.9s cubic-bezier(.2, .8, .2, 1) both; }
+
+/* scroll reveal */
+.th-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.8s cubic-bezier(.2, .8, .2, 1), transform 0.8s cubic-bezier(.2, .8, .2, 1);
+}
+.th-reveal.is-shown { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .th-reveal { opacity: 1; transform: none; transition: none; }
+  .th-rise { animation: none; }
+}
+
+/* hover states (design's style-hover) */
+.th-ghost-btn { transition: border-color 0.2s, background 0.2s; }
+.turumba-home .th-ghost-btn:hover { background: rgba(255, 255, 255, 0.1); color: #ffffff; }
+.th-why-item { transition: background 0.2s; }
+.th-why-item:hover { background: rgba(238, 238, 238, 0.6); }
+.th-cap-card { transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
+.th-cap-card:hover { border-color: rgba(21, 101, 192, 0.3) !important; box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -2px rgba(15, 23, 42, 0.1) !important; transform: translateY(-2px); }
+.th-bible-card { transition: border-color 0.2s; }
+.th-bible-card:hover { border-color: rgba(21, 101, 192, 0.5) !important; }
+.th-verse { transition: border-color 0.2s, transform 0.2s; }
+.th-verse:hover { border-color: rgba(161, 193, 230, 0.8) !important; transform: translateY(-2px); }
+.turumba-home .th-foot-link { color: inherit; transition: color 0.2s; }
+.turumba-home .th-foot-link:hover { color: #1a1a1a; }
+
+/* responsive (design's data-rs hooks) */
+@media (max-width: 900px) {
+  .turumba-home [data-rs~="pad"] { padding-left: var(--th-gutter) !important; padding-right: var(--th-gutter) !important; }
+  .turumba-home [data-rs~="pady"] { padding-top: 72px !important; padding-bottom: 72px !important; }
+  .turumba-home [data-rs~="grid2"] { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .turumba-home [data-rs~="grid4"] { grid-template-columns: 1fr 1fr !important; }
+  .turumba-home [data-rs~="grid3"] { grid-template-columns: 1fr !important; }
+  .turumba-home [data-rs~="h1"] { font-size: 44px !important; line-height: 1 !important; }
+  .turumba-home [data-rs~="tagline"] { font-size: 19px !important; line-height: 1.5 !important; }
+  .turumba-home [data-rs~="pill"] { font-size: 15px !important; }
+  .turumba-home .th-br { display: none; }
+  .turumba-home [data-rs~="h2"] { font-size: 32px !important; }
+  .turumba-home [data-rs~="h2xl"] { font-size: 36px !important; }
+  .turumba-home [data-rs~="hide"] { display: none !important; }
+  .turumba-home [data-rs~="stack"] { flex-direction: column !important; align-items: flex-start !important; }
+  .turumba-home [data-rs~="stackc"] { flex-direction: column !important; align-items: stretch !important; }
+  .turumba-home [data-rs~="wrap"] { flex-wrap: wrap !important; }
+  .turumba-home [data-rs~="heropad"] { padding: 72px var(--th-gutter) 72px !important; }
+}
+@media (max-width: 560px) {
+  .turumba-home [data-rs~="grid4"] { grid-template-columns: 1fr !important; }
+  .turumba-home [data-rs~="h1"] { font-size: 38px !important; }
+}
+
+
+/* Brand pattern — the Turumba trumpet sound wave, used as a background texture on brand colors */
+.th-pattern { position: relative; isolation: isolate; }
+.th-pattern::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: url("/brand/pattern-white.svg") center / 1400px auto repeat;
+  opacity: 0.16;
+}
+.th-pattern-soft::before {
+  opacity: 0.07;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
+  mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
+}
+.th-pattern > * { position: relative; z-index: 1; }
+
+/* Hero globe overlays: pulsing halo around Addis Ababa and the ring burst when a message arrives */
+.hg-halo, .hg-burst {
+  position: absolute; left: 0; top: 0; width: 0; height: 0; border-radius: 999px;
+  border: 1.5px solid #1565c0; transform: translate(-50%, -50%); pointer-events: none;
+}
+.hg-halo { animation: hg-halo 2.6s ease-out infinite; }
+.hg-halo-2 { animation-delay: 1.3s; }
+@keyframes hg-halo {
+  0% { width: 14px; height: 14px; opacity: 0.6; }
+  100% { width: 90px; height: 90px; opacity: 0; }
+}
+.hg-burst { border-width: 2px; animation: hg-burst 0.9s ease-out forwards; }
+@keyframes hg-burst {
+  0% { width: 16px; height: 16px; opacity: 1; }
+  100% { width: 160px; height: 160px; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hg-halo { animation: none; width: 26px; height: 26px; opacity: 0.5; }
+}
+
+/* hero text reveal — slides up from behind a mask, like the partners hero */
+.th-mask { overflow: hidden; }
+@keyframes th-slide { from { transform: translateY(110%); } to { transform: none; } }
+.th-slide { animation: th-slide 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@media (max-width: 1280px) and (min-width: 901px) {
+  .turumba-home [data-rs~="h1"] { font-size: 72px !important; line-height: 66px !important; }
+  .turumba-home [data-rs~="tagline"] { font-size: 24px !important; line-height: 31px !important; }
+}
+@media (prefers-reduced-motion: reduce) { .th-slide { animation: none; } }

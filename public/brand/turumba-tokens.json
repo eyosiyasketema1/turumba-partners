@@ -1,0 +1,438 @@
+{
+  "name": "Turumba Messaging",
+  "tagline": "From content to connection to community.",
+  "specVersion": "0.3.0",
+  "version": 2,
+  "language": "en",
+  "company": {
+    "name": "Agelgel Technologies",
+    "location": "Addis Ababa, ET",
+    "note": "Brand Bible spells this 'Agelgel Technonlogies'. Confirm legal spelling."
+  },
+  "meaning": "Turumba means 'to proclaim' (Proverbs 31:8-9)",
+  "strategy": {
+    "overview": {
+      "summary": "Turumba is a multi-channel messaging platform built to help content creators, churches, and ministry organizations take their message where people already are.",
+      "origin": "Invented by local believers in Ethiopia in collaboration with Christian missionaries across Africa and Asia, built out of their own ministry needs and with great personal sacrifice.",
+      "whatItDoes": "Aggregates WhatsApp, Telegram, Facebook Messenger, SMS, email and more into one dashboard, and distributes follow-up to the whole body of Christ, not just paid staff.",
+      "problem": "Discipleship does not happen when someone visits a website. It happens through relationships and conversation on the platforms people already use.",
+      "before": "A creator with large reach, no capacity for personal follow-up, and an audience that never becomes a community.",
+      "after": "Content moves to connection, and connection moves to community.",
+      "heritage": "Turumba 1.0 trained over 60,000 digital missionaries and processed up to 150,000 messages per minute at peak. Turumba 2.0 rebuilds seven years of learning on a modern architecture.",
+      "coreConviction": "The message is the product, not the technology.",
+      "mission": "Uberize connections and community with your content. Empower content creators, churches, and ministry organizations to take their message where people already are, through the messaging platforms they use every day.",
+      "vision": "A world where every believer, from an individual content creator to a denomination of ten thousand churches, has the tools to do sustainable, relational digital ministry at scale. Where if you have a cell phone, you can be a missionary. Where the body of Christ is empowered to move from content to connection to community, reaching the last, the least, and the lost through the platforms where their people live."
+    },
+    "audience": {
+      "primary": [
+        {
+          "name": "Content creators and student groups",
+          "description": "Individual pastors, campus ministry leaders, and digital missionaries creating content on social media, under an organization or denomination. They generate reach but lack capacity for personal follow-up at scale."
+        },
+        {
+          "name": "Small ministry organizations",
+          "size": "Teams of 5-50",
+          "examples": ["Horn of Africa Ministry", "Gospel Ambition", "Christian camp ministries"],
+          "description": "Field teams closest to the ground who need affordable, purpose-built digital outreach tools they could never build on their own."
+        },
+        {
+          "name": "Large ministry organizations",
+          "examples": ["OneHope", "BGEA", "IMB", "Cru", "I am Second"],
+          "description": "Need enterprise-grade multi-channel messaging, on-premise deployment for security, and a replacement for aging tools like Echo Global at a fraction of the cost."
+        },
+        {
+          "name": "Denominational church leaders",
+          "examples": ["Kale Heywet (13,000 churches)"],
+          "description": "Leaders of denominations and church networks who want to equip every church with digital outreach tools at negligible per-church cost."
+        },
+        {
+          "name": "Secular content creators and businesses",
+          "description": "Individuals and businesses needing professional multi-channel chat management and automation, served at full commercial rates. This revenue subsidizes ministry access."
+        }
+      ],
+      "notFor": "Teams whose goal is only to make a sale."
+    },
+    "positioning": {
+      "category": "Ministry-first multi-channel chat aggregation platform",
+      "positioningLine": "Innovative and Affordable",
+      "isNot": ["premium", "luxury", "traditional", "a sales automation tool", "a generic helpdesk", "a software vendor"],
+      "differentials": [
+        "Built from the ground up for ministry",
+        "On-premise and self-hosted deployment for closed-country security",
+        "Seamless switching of social media accounts after government censorship without losing contacts or ministry strategy",
+        "Pricing that does not penalize scale, from a team of 5 to a denomination of 13,000 churches",
+        "Follow-up distributed across the whole body of Christ",
+        "Field-first design philosophy"
+      ],
+      "territory": "Ministry continuity",
+      "competitors": [
+        {
+          "name": "Echo Global",
+          "strengths": "Established in ministry space, proven at scale",
+          "weaknesses": "Aging architecture, expensive at scale, no on-premise option, degrading"
+        },
+        {
+          "name": "ManyChat",
+          "strengths": "Good automation, user-friendly interface",
+          "weaknesses": "Too expensive for ministry budgets, data must be deleted to manage costs, drives sales rather than discipleship"
+        },
+        {
+          "name": "Chatwoot",
+          "strengths": "Open-source, self-hostable",
+          "weaknesses": "Not ministry-focused, no journey builder, limited multi-tenant support"
+        },
+        {
+          "name": "Zendesk / Intercom",
+          "strengths": "Enterprise-grade helpdesk features",
+          "weaknesses": "Wrong pricing model for ministry, no understanding of field realities"
+        }
+      ]
+    },
+    "personality": {
+      "archetype": "The Co-laborer / The Herald (proposal, not in source)",
+      "attributes": ["Bold", "Missional", "Empowering", "Warm"],
+      "is": ["Confident", "Visionary", "Grounded", "Practical", "Spiritually deep without religious jargon"],
+      "isNot": ["Timid", "Transactional", "Directive", "Cold", "A vendor"]
+    },
+    "references": {
+      "positive": [],
+      "negative": [
+        { "name": "ManyChat", "reject": "Sale-first framing" },
+        { "name": "Echo Global", "reject": "Aging architecture and pricing that punishes scale" },
+        { "name": "Zendesk / Intercom", "reject": "Enterprise helpdesk vocabulary and pricing that ignores field realities" },
+        { "name": "Staged stock imagery", "reject": "Stock poses, artificial setups, harsh shadows, clutter" }
+      ]
+    },
+    "promise": {
+      "toMinistryPartners": "We will never penalize the scale of your ministry. Turumba is built so that growth makes things easier and more affordable, not harder and more expensive. Your content, your contacts, and your conversation history belong to you. We will always go where people are, and we will always design for the last, least, and lost.",
+      "toContentCreators": "We believe in you and the content God gave you. We exist to help you move from content to connection to community, empowering you to engage your audience and entrust the body of Christ to disciple them. You create. We bridge.",
+      "toAllCustomers": "A message deserves a great messenger. We promise to keep the message, not the technology, at the center of everything we build.",
+      "synthesizingPhrase": "Turumba exists so that every message finds its people."
+    },
+    "guardrails": {
+      "toneSummary": "Bold, missional, empowering, warm.",
+      "cannotBe": [
+        "A software vendor",
+        "A sales or conversion brand",
+        "A premium or luxury brand",
+        "A traditional or legacy brand",
+        "Anything that penalizes scale or makes growth harder"
+      ],
+      "litmusTest": "If it talks about us more than about the creator, ministry leader, or church, it is wrong."
+    }
+  },
+  "voice": {
+    "identity": {
+      "statement": "We are for the content creator, the pastor, the campus ministry leader, the digital missionary. We are not a software company. The content God gave you matters more than any platform. We exist because a message deserves a great messenger.",
+      "essence": "We built the bridge between your content and your community."
+    },
+    "taglines": {
+      "primary": "From content to connection to community.",
+      "secondary": "Empower creators, one chat at a time.",
+      "alternatives": [
+        "Big vision. Simple approach. Your content. Your community. We built the bridge.",
+        "You create. We bridge.",
+        "Level up your communication, make the most out of every conversation."
+      ],
+      "byContext": {
+        "brandBibleAndCampaigns": "From content to connection to community.",
+        "creatorFacing": "You create. We bridge.",
+        "manifestoSignOff": "Big vision. Simple approach. Your content. Your community. We built the bridge.",
+        "productMarketing": "One platform to message, automate, & engage.",
+        "productSubline": "Keep ministry communication clear, timely, and coordinated."
+      }
+    },
+    "messagePillars": [
+      {
+        "name": "Message first",
+        "points": ["The message is the product, not the technology.", "A message deserves a great messenger."]
+      },
+      {
+        "name": "Where people are",
+        "points": [
+          "WhatsApp groups, Telegram chats, and Facebook Messenger threads are where people live.",
+          "It takes more than a website. It takes meeting people where they already are."
+        ]
+      },
+      {
+        "name": "Whole body of Christ",
+        "points": ["Follow-up is distributed to the entire body of Christ, not just paid staff.", "Empower, entrust, and engage."]
+      },
+      {
+        "name": "Ministry continuity",
+        "points": ["Built for closed-country operations.", "Switch accounts after censorship without losing contacts or strategy."]
+      },
+      {
+        "name": "Affordable at any scale",
+        "points": ["Growth makes things easier and more affordable, not harder.", "SaaS and self-hosted options."]
+      }
+    ],
+    "phrases": [
+      "From content to connection to community.",
+      "Empower creators, one chat at a time.",
+      "You create. We bridge.",
+      "We built the bridge.",
+      "A message deserves a great messenger.",
+      "The message is the product, not the technology.",
+      "If you have a cell phone, you can be a missionary.",
+      "The last, the least, and the lost.",
+      "We go where people are.",
+      "Empower, entrust, and engage.",
+      "Where ManyChat helps you make a sale, Turumba helps you make a disciple."
+    ],
+    "vocabulary": {
+      "status": "Proposal. Not defined in source.",
+      "terms": [
+        { "concept": "The people we serve", "weCallIt": "creators, ministry leaders, churches, partners", "notThis": "users, accounts" },
+        { "concept": "People who carry the message", "weCallIt": "digital missionaries", "notThis": "agents, reps" },
+        { "concept": "The people reached", "weCallIt": "audience, people, believers", "notThis": "leads, targets, traffic" },
+        { "concept": "Moving someone toward faith and belonging", "weCallIt": "discipleship, follow-up", "notThis": "funnel, conversion" },
+        { "concept": "Where conversations happen", "weCallIt": "channels, platforms people already use", "notThis": "touchpoints" },
+        { "concept": "Who we are to the customer", "weCallIt": "co-laborer, bridge", "notThis": "vendor, provider" }
+      ]
+    },
+    "tonalRules": [
+      "Talk about the creator, the ministry leader, and the church more than about ourselves.",
+      "Be confident and visionary: 'We believe in what you do.'",
+      "Stay grounded and practical. Pair big claims with a concrete mechanism.",
+      "Use spiritual depth without religious jargon.",
+      "Speak like a passionate co-laborer, not a software vendor.",
+      "Use 'we' for Turumba and 'you' for the creator, ministry leader, or church.",
+      "Lead with the mission, not the feature list.",
+      "With secular audiences, shift to a professional and modern register that leads with capability and value.",
+      "Say plainly that we do not exist to sell software."
+    ],
+    "weSayWeNeverSay": [
+      { "say": "You create. We bridge.", "never": "Leverage our solution" },
+      { "say": "Help you make a disciple", "never": "Maximize conversions" },
+      { "say": "Meet people where they already are", "never": "Drive traffic to your site" },
+      { "say": "Growth makes things easier and more affordable", "never": "Scale your plan to unlock more features" },
+      { "say": "Your content, your contacts, your history belong to you", "never": "Data retention limits apply" },
+      { "say": "We believe in what you do", "never": "We are the leading provider" }
+    ]
+  },
+  "visual": {
+    "colors": {
+      "primary": [
+        {
+          "name": "Blue Ocean",
+          "hex": "#1565C0",
+          "rgb": [21, 101, 192],
+          "cmyk": [87, 62, 0, 0],
+          "mandatory": true,
+          "tints": ["#4484CD", "#72A2D9", "#A1C1E6", "#B8D0EC", "#CFDFF2", "#E7EFF9", "#FEFEFF"],
+          "shades": ["#11519A", "#0D3D73", "#08284D", "#061E3A", "#041426", "#020A13", "#000000"]
+        },
+        {
+          "name": "Prussian Blue",
+          "hex": "#1C4BD1",
+          "rgb": [28, 75, 209],
+          "cmyk": [87, 81, 55, 75],
+          "tints": ["#496FDA", "#7793E3", "#A4B7ED", "#BBC9F1", "#D2DBF6", "#E8EDFA", "#FFFFFF"],
+          "shades": ["#163CA7", "#112D7D", "#0B1E54", "#08173F", "#060F2A", "#030815", "#000000"],
+          "note": "Brand Bible lists RGB 0,0,34, which does not match the hex. Value shown is converted from the hex."
+        },
+        {
+          "name": "Indigo Blue",
+          "hex": "#371CD1",
+          "rgb": [55, 28, 209],
+          "cmyk": [87, 81, 55, 75],
+          "tints": ["#5F49DA", "#8777E3", "#AFA4ED", "#C3BBF1", "#D7D2F6", "#EBE8FA", "#FFFFFF"],
+          "shades": ["#2C16A7", "#21117D", "#160B54", "#11083F", "#0B062A", "#060315", "#000000"],
+          "note": "Brand Bible lists RGB 0,0,34, which does not match the hex. Value shown is converted from the hex."
+        }
+      ],
+      "accent": [
+        {
+          "name": "Cyan",
+          "hex": "#03FFFF",
+          "rgb": [3, 255, 255],
+          "cmyk": [52, 0, 13, 0],
+          "usage": "Highlights key information and guides attention. Large text only on light grounds."
+        },
+        {
+          "name": "Amber Flame",
+          "hex": "#FDBA00",
+          "rgb": [253, 186, 0],
+          "cmyk": [0, 29, 100, 0],
+          "usage": "Adds warmth and expressive moments."
+        }
+      ],
+      "accentNote": "Accent ramps in the Brand Bible repeat the blue ramp hex values. Regenerate true ramps before shipping.",
+      "neutral": [
+        { "hex": "#000000", "rgb": [0, 0, 0] },
+        { "hex": "#1A1A1A", "rgb": [26, 26, 26] },
+        { "hex": "#2B2A2A", "rgb": [43, 42, 42] },
+        { "hex": "#363636", "rgb": [54, 54, 54] },
+        { "hex": "#707070", "rgb": [112, 112, 112] },
+        { "hex": "#8F8F8F", "rgb": [143, 143, 143] },
+        { "hex": "#C7C7C7", "rgb": [199, 199, 199] },
+        { "hex": "#E5E5E5", "rgb": [229, 229, 229] },
+        { "hex": "#EEEEEE", "rgb": [238, 238, 238] },
+        { "hex": "#F7F7F7", "rgb": [247, 247, 247] },
+        { "hex": "#FFFFFF", "rgb": [255, 255, 255] }
+      ],
+      "gradients": [
+        ["Blue Ocean", "#000000"],
+        ["Prussian Blue", "#FFFFFF"],
+        ["Blue Ocean", "Indigo Blue"],
+        ["Indigo Blue", "Blue Ocean", "Cyan"],
+        ["Blue Ocean", "Cyan", "#000000"],
+        ["Blue Ocean", "Indigo Blue", "#000000"]
+      ],
+      "approvedCombinations": [
+        { "text": "white", "on": ["Blue Ocean", "Prussian Blue", "black"] },
+        { "text": "Cyan", "on": ["Blue Ocean", "Prussian Blue", "black"], "restriction": "Large text only" }
+      ],
+      "logoColors": "Full color on white in approved blue, deep blue, and violet. White on colored or black backgrounds."
+    },
+    "typography": {
+      "primary": {
+        "family": "DM Sans",
+        "use": "Headings, body copy, interface elements, supporting content",
+        "weights": ["Thin", "Extralight", "Light", "Regular", "Medium", "SemiBold", "Bold", "Extrabold", "Black"],
+        "fallback": "-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
+        "license": "SIL Open Font License 1.1 (verify)"
+      },
+      "secondary": {
+        "family": "Inter",
+        "use": "Editorial layouts, supporting content, greater typographic contrast. Always complements DM Sans.",
+        "weights": ["Regular", "Medium", "SemiBold"],
+        "license": "SIL Open Font License 1.1 (verify)"
+      },
+      "scale": [
+        { "style": "Title", "family": "DM Sans", "weight": "Bold", "sizePx": 72 },
+        { "style": "Sub-title", "family": "DM Sans", "weight": "SemiBold", "sizePx": 36 },
+        { "style": "Body", "family": "DM Sans", "weight": "Regular", "sizePx": 20 },
+        { "style": "Body small", "family": "DM Sans", "weight": "Regular", "sizePx": 14 },
+        { "style": "Label", "family": "DM Sans", "weight": "Regular", "sizePx": 12 }
+      ],
+      "rules": ["Use display styles sparingly, for major sections only.", "Avoid unnecessary variation between text styles."]
+    },
+    "logo": {
+      "logomark": "Circular mark containing a stylized trumpet line. Used alone when space is limited or the brand is well established.",
+      "logotype": "'Turumba' with 'Messaging' and a TM mark. Used for first impressions, formal communications, and wherever recognition is essential.",
+      "lockups": ["horizontal", "horizontal condensed", "vertical", "vertical condensed"],
+      "preferredLockup": "horizontal, whenever space allows",
+      "clearspace": "Minimum equal to the height of the symbol on every side.",
+      "minimumSize": {
+        "fullLogo": { "print": "50mm", "screen": "100px" },
+        "logomark": { "print": "15mm", "screen": "50px" }
+      },
+      "placement": {
+        "corners": "Informational and content-led applications",
+        "center": "Expressive or presentation-focused compositions",
+        "rule": "Never compete with primary content"
+      },
+      "coBranding": "Both brands sit together clearly and equally. The 'T' of the logotype defines clear space and distance to the partner mark.",
+      "misuse": [
+        "Skew, stretch, or rotate",
+        "Fade or make transparent",
+        "Add strokes, outlines, emboss, 3D effects, or drop shadows",
+        "Change the colors of individual characters",
+        "Modify any part, or scale or move parts independently",
+        "Place on busy imagery without a solid container",
+        "Place on a cluttered background"
+      ]
+    },
+    "photographyAndIllustration": {
+      "mood": ["authentic", "modern", "purposeful", "optimistic", "warm"],
+      "principles": [
+        { "name": "Recognizable", "description": "Distinctive, authentic, and easy to remember." },
+        { "name": "People-first", "description": "People, relationships, and human experiences at the center." },
+        { "name": "Forward-looking", "description": "Modern, optimistic imagery that communicates progress, possibility, and growth." }
+      ],
+      "subjects": ["People and users in real moments", "Phones in hands", "Creators filming", "Church and ministry settings", "The Turumba trumpet as a heritage object"],
+      "lighting": "Soft natural daylight, often from windows, with balanced exposure and a clean, warm look.",
+      "environment": ["Homes", "Offices", "Professional settings", "Collaborative workspaces"],
+      "avoid": ["Stock poses", "Artificial setups", "Harsh shadows", "Clutter"],
+      "do": [
+        "Keep the subject simple and in focus.",
+        "Keep color true to life, or reduce color.",
+        "Use images with a solid background and put text in the space beside the subject."
+      ],
+      "dont": [
+        "Use busy images where subject and background colors blend.",
+        "Manipulate hue, saturation, brightness, or contrast unrealistically.",
+        "Overlay text on the subject. If unavoidable, use an overlay."
+      ],
+      "iconography": {
+        "style": ["minimal", "consistent", "line-based", "functional"],
+        "grid": "24px",
+        "stroke": "2px centered",
+        "cornerRadius": { "exterior": "2px", "interior": "0px" },
+        "anchors": "Snapped to a 1px grid",
+        "rotation": "45 degree increments"
+      }
+    },
+    "artDirection": {
+      "designKeywords": ["Sound made visible", "Vertical rhythm", "Deep blue", "Real people", "Clear space for text", "One message"],
+      "directionStatement": "The identity should communicate a bridge between a creator and their people. Every decision should put the message ahead of the technology.",
+      "visualTerritory": "The sound of the Turumba trumpet. Deep blue fields that shift into light. A single human subject in natural light. Vertical pulses of sound running across the surface.",
+      "pattern": {
+        "concept": "Inspired by the sound of the Turumba trumpet. Each vertical line is a pulse of sound, a message sent out and heard. Varied heights and spacing show communication traveling across the platform.",
+        "use": "Background texture on brand colors",
+        "grounds": ["Blue Ocean", "Prussian Blue", "Indigo Blue", "black"]
+      },
+      "layout": "Section dividers use a large numeral, a thin horizontal rule, an arrow, and a large white title on the blue gradient and pattern. Content pages use white or #F7F7F7 grounds, blue headings, and gray body text."
+    }
+  },
+  "governance": {
+    "naming": {
+      "reserved": ["Turumba", "Turumba Messaging", "Turumba 1.0", "Turumba 2.0"],
+      "willNotUse": ["Names that imply the software replaces the messenger", "Names that frame the product as sales automation"],
+      "review": "New feature names require review before they ship publicly.",
+      "status": "Proposal. Not defined in source."
+    },
+    "claims": {
+      "note": "Figures below come from the source documents. Each needs a verifiable artifact before public use.",
+      "candidates": [
+        "Turumba 1.0 trained over 60,000 digital missionaries.",
+        "Turumba 1.0 processed up to 150,000 messages per minute at peak.",
+        "Turumba 1.0 was pivotal in millions of people reading God's word.",
+        "Turumba 2.0 rebuilds seven years of learning on a modern architecture.",
+        "Turumba is the only ground-up chat aggregation platform built specifically for ministry.",
+        "Turumba is the only platform specifically designed for closed-country operations.",
+        "Turumba offers SaaS and self-hosted options."
+      ],
+      "requiresReview": [
+        "Any comparison naming a competitor, including pricing figures",
+        "Any statement about a named partner or denomination",
+        "Any statement about security, censorship resistance, or closed-country safety",
+        "Any statement about data ownership or residency",
+        "Any AI-powered claim"
+      ],
+      "prohibited": [
+        "Any claim of compliance or certification the company does not hold",
+        "Any guarantee of outcomes in conversion, salvation, or growth",
+        "Any identification of individual believers or ministries in closed countries"
+      ],
+      "agentRule": "An agent may draft a candidate claim, but it must be labeled a draft until a human approves it and attaches evidence."
+    },
+    "accessibility": {
+      "status": "Proposal. Source sets no formal target.",
+      "target": "WCAG 2.2 AA on every public surface and in the product",
+      "knownConstraints": [
+        "Cyan on Blue Ocean, Prussian Blue, or black is for large text only.",
+        "Do not overlay text on busy imagery. Use a solid background or an overlay.",
+        "Minimum logo sizes apply on screen and in print."
+      ],
+      "verifiedSeparately": ["Text sizing", "Zoom", "Focus visibility", "Keyboard operation", "Overall conformance"],
+      "fieldContext": "Test on low bandwidth and small screens."
+    }
+  },
+  "openItems": [
+    "AI positioning conflict: Brand Bible type specimen says 'powered by AI'; the Strategy Brief never mentions AI.",
+    "Prussian Blue and Indigo Blue RGB values in the Brand Bible do not match their hex values.",
+    "Accent color ramps in the Brand Bible reuse blue ramp hex values.",
+    "Confirm legal spelling of company name ('Technonlogies' in source).",
+    "Imagery shows office and city settings while the audience is in rural and hostile regions. Consider field imagery.",
+    "Positive references and controlled vocabulary are not defined in source.",
+    "Define how far the tone shifts for secular audiences.",
+    "Strategy Brief ends with an empty 'Discussion' section."
+  ],
+  "sources": [
+    "Turumba Brand Bible, Version 2.0, 2026",
+    "Brand Strategy Brief, Ruhama Lemma and Team, February 19, 2026"
+  ]
+}
