@@ -5,7 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 export default function CTASection() {
   return (
     <section className="w-full bg-white text-black">
-      <div className="max-w-[1440px] mx-auto w-full px-12">
+      <div className="max-w-[1440px] mx-auto w-full px-6">
         {/* Main Image Container */}
         <div className="relative w-full aspect-[4/3] lg:aspect-[3/2] max-h-[85vh] rounded-[6px] overflow-hidden">
           

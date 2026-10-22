@@ -8,7 +8,7 @@
    - the globe follows the pointer, slowly turns, and can be dragged
    Every accent (markers, arcs, rings, label) is the brand primary, Blue Ocean #1565C0. */
 
-import createGlobe, { type Arc, type Marker } from "cobe";
+import createGlobe, { type Marker } from "cobe";
 import { useEffect, useRef, useState } from "react";
 
 type LatLon = [number, number];
@@ -57,8 +57,8 @@ const CONTACTS: number[][] = CITIES.map((c, i) => {
 
 // brand primary (Blue Ocean #1565C0) as cobe RGB
 const PRIMARY: [number, number, number] = [21 / 255, 101 / 255, 192 / 255];
-const scale = (k: number): [number, number, number] => [PRIMARY[0] * k, PRIMARY[1] * k, PRIMARY[2] * k];
 
+const SPIN_DELAY = 2.8; // seconds: the globe fades in (0.8s + 1.4s), then holds still for ~2s before it starts turning
 const CYCLE = 16; // seconds for the ambient messages to cycle through all pairs
 const SEND_TRAVEL = 1.4, SEND_LIFE = 3.6;
 // open facing Africa (≈ 3°N, 20°E)
@@ -69,6 +69,7 @@ export function HeroGlobe({ onHoverChange }: { onHoverChange?: (name: string | n
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const labelRef = useRef<HTMLDivElement>(null);
   const burstLayerRef = useRef<HTMLDivElement>(null);
+  const linesRef = useRef<SVGSVGElement>(null);
   const onHoverRef = useRef(onHoverChange);
   const [cursor, setCursor] = useState<"grab" | "pointer" | "grabbing">("grab");
 
@@ -86,7 +87,40 @@ export function HeroGlobe({ onHoverChange }: { onHoverChange?: (name: string | n
     let hover = -1;
     let dragging = false, downX = 0, downY = 0, lastX = 0, lastY = 0, moved = false;
     const nextContact = CITIES.map(() => 0);
-    const sends: { from: number; to: number; t0: number; burst: boolean }[] = [];
+    const sends: { id: string; from: number; to: number; t0: number; burst: boolean }[] = [];
+    let sendSeq = 0;
+    const dots = new Map<string, HTMLDivElement>(); // glowing dots leading each moving line
+
+    // ---- lines: drawn by us (not cobe) along a FIXED arch, revealed from start to end with a glowing dot at the tip,
+    // exactly like the journey strip. Projection matches cobe's own (sphere radius 0.8, same phi/theta maths).
+    const R = 0.8 + 0.02; // globe radius + marker elevation
+    const v3 = ([lat, lon]: LatLon) => { // cobe's lat/lon → 3D convention
+      const r = (lat * Math.PI) / 180, a = (lon * Math.PI) / 180 - Math.PI, o = Math.cos(r);
+      return [-o * Math.cos(a), Math.sin(r), o * Math.sin(a)];
+    };
+    const SAMPLES = 48;
+    const archCache = new Map<string, number[][]>();
+    const arch = (a: number, b: number) => { // 3D points along the great circle, lifted into an arch
+      const key = `${a}-${b}`;
+      let pts = archCache.get(key);
+      if (!pts) {
+        const A = CITIES[a].loc, B = CITIES[b].loc, lift = 0.06 + 0.22 * Math.min(1, angle(A, B) / 1.6);
+        pts = [];
+        for (let k = 0; k <= SAMPLES; k++) {
+          const f = k / SAMPLES, v = v3(slerp(A, B, f)), r = R + lift * Math.sin(Math.PI * f);
+          pts.push([v[0] * r, v[1] * r, v[2] * r]);
+        }
+        archCache.set(key, pts);
+      }
+      return pts;
+    };
+    const project = (p: number[], W: number, H: number) => {
+      const cl = Math.cos(theta), cf = Math.cos(phi), sl = Math.sin(theta), sf = Math.sin(phi);
+      const c = cf * p[0] + sf * p[2];
+      const s = sf * sl * p[0] + cl * p[1] - cf * sl * p[2];
+      const z = -sf * cl * p[0] + sl * p[1] + cf * cl * p[2];
+      return { x: ((c + 1) / 2) * W, y: ((-s + 1) / 2) * H, vis: z >= 0 || c * c + s * s >= 0.64 };
+    };
     const t0 = performance.now();
     const now = () => (performance.now() - t0) / 1000;
 
@@ -104,10 +138,6 @@ export function HeroGlobe({ onHoverChange }: { onHoverChange?: (name: string | n
       markerColor: PRIMARY,
       glowColor: [0.03, 0.12, 0.24],
       markers: [],
-      arcs: [],
-      arcColor: PRIMARY,
-      arcWidth: 0.5,
-      arcHeight: 0.28,
       markerElevation: 0.02,
     });
 
@@ -178,7 +208,7 @@ export function HeroGlobe({ onHoverChange }: { onHoverChange?: (name: string | n
           nextContact[from]++;
           const t = now();
           for (let k = sends.length - 1; k >= 0; k--) if (t - sends[k].t0 > SEND_LIFE) sends.splice(k, 1);
-          sends.push({ from, to, t0: t, burst: false });
+          sends.push({ id: `s${sendSeq++}`, from, to, t0: t, burst: false });
         }
       }
       setCursor(hover >= 0 ? "pointer" : "grab");
@@ -205,7 +235,7 @@ export function HeroGlobe({ onHoverChange }: { onHoverChange?: (name: string | n
     const tick = () => {
       const t = now();
       if (!dragging) {
-        if (!reduceMotion && hover < 0) spin += 0.0012;           // slow turn, pauses while a city is hovered
+        if (!reduceMotion && hover < 0 && t > SPIN_DELAY) spin += 0.0012; // slow turn after a short pause, stops while a city is hovered
         theta += (BASE_THETA + (ptrNY - 0.5) * 0.22 - theta) * 0.05; // follow the pointer, ease back
       }
       phi += (BASE_PHI + spin + (ptrNX - 0.5) * 0.35 - phi) * 0.08;
@@ -220,31 +250,75 @@ export function HeroGlobe({ onHoverChange }: { onHoverChange?: (name: string | n
         id: `c${i}`,
       }));
 
-      const arcs: Arc[] = [];
-      // ambient messages between countries, drawing themselves and fading out
+      type Line = { key: string; a: number; b: number; p: number; alpha: number; dot: boolean; strong?: boolean };
+      const lines: Line[] = [];
+      // ambient messages between countries: each line reveals itself from its city, led by a glowing dot, then fades
       PAIRS.forEach(([a, b], i) => {
         const local = (t + i * (CYCLE / PAIRS.length)) % CYCLE;
         const fade = local < 4.5 ? Math.min(1, (4.5 - local) / 1.2) : 0;
         if (fade <= 0) return;
         const p = reduceMotion ? 1 : easeInOut(local / 2.2);
-        arcs.push({ from: CITIES[a].loc, to: p >= 1 ? CITIES[b].loc : slerp(CITIES[a].loc, CITIES[b].loc, p), color: scale(0.6 + 0.6 * fade) });
+        lines.push({ key: `p${i}`, a, b, p, alpha: 0.55 + 0.45 * fade * (p < 1 ? 1 : fade), dot: p < 1 });
       });
-      // hovered city → its contacts
+      // hovered city → its contacts (full lines, pulsing)
       if (hover >= 0) {
-        const pulse = 1.1 + 0.4 * Math.sin(t * 6);
-        CONTACTS[hover].forEach((c) => arcs.push({ from: CITIES[hover].loc, to: CITIES[c].loc, color: scale(pulse) }));
+        const pulse = 0.75 + 0.25 * Math.sin(t * 6);
+        CONTACTS[hover].forEach((c) => lines.push({ key: `h${c}`, a: hover, b: c, p: 1, alpha: pulse, dot: false, strong: true }));
       }
-      // sent messages
+      // sent messages: same treatment, brighter, with a ring burst when the dot arrives
       for (const s of sends) {
         const age = t - s.t0;
         if (age < 0 || age > SEND_LIFE) continue;
-        const p = Math.min(1, age / SEND_TRAVEL);
+        const p = easeInOut(Math.min(1, age / SEND_TRAVEL));
         const fade = Math.min(1, (SEND_LIFE - age) / 0.8);
-        arcs.push({ from: CITIES[s.from].loc, to: p >= 1 ? CITIES[s.to].loc : slerp(CITIES[s.from].loc, CITIES[s.to].loc, easeInOut(p)), color: scale(0.6 + 1.0 * fade) });
-        if (p >= 1 && !s.burst) { s.burst = true; burst(s.to); }
+        lines.push({ key: s.id, a: s.from, b: s.to, p, alpha: fade, dot: age < SEND_TRAVEL, strong: true });
+        if (age >= SEND_TRAVEL && !s.burst) { s.burst = true; burst(s.to); }
       }
 
-      globe.update({ phi, theta, markers, arcs });
+      globe.update({ phi, theta, markers });
+
+      // draw the lines into the SVG overlay and move the dots
+      const svg = linesRef.current, layer = burstLayerRef.current;
+      const W = host.clientWidth, H = host.clientHeight;
+      if (svg) {
+        svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+        let html = "";
+        const seen = new Set<string>();
+        for (const L of lines) {
+          const pts = arch(L.a, L.b), end = L.p * SAMPLES, last = Math.floor(end);
+          const runs: string[] = [];
+          let run = "";
+          let tip: { x: number; y: number; vis: boolean } | null = null;
+          for (let k = 0; k <= Math.min(last + 1, SAMPLES); k++) {
+            let q = pts[k];
+            if (k > end) { // interpolate the exact tip between samples
+              const f = end - last, a0 = pts[last], b0 = pts[k];
+              q = [a0[0] + (b0[0] - a0[0]) * f, a0[1] + (b0[1] - a0[1]) * f, a0[2] + (b0[2] - a0[2]) * f];
+            }
+            const pr = project(q, W, H);
+            tip = pr;
+            if (pr.vis) run += `${run ? "L" : "M"}${pr.x.toFixed(1)} ${pr.y.toFixed(1)}`;
+            else if (run) { runs.push(run); run = ""; }
+          }
+          if (run) runs.push(run);
+          const d = runs.join("");
+          if (d) {
+            const w = L.strong ? 2.2 : 1.6;
+            html += `<path d="${d}" fill="none" stroke="rgba(21,101,192,${(0.35 * L.alpha).toFixed(3)})" stroke-width="${w * 4}" stroke-linecap="round" stroke-linejoin="round"/>`;
+            html += `<path d="${d}" fill="none" stroke="rgba(21,101,192,${L.alpha.toFixed(3)})" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+          }
+          if (L.dot && tip && layer) {
+            seen.add(L.key);
+            let dot = dots.get(L.key);
+            if (!dot) { dot = document.createElement("div"); dot.className = "hg-dot"; layer.appendChild(dot); dots.set(L.key, dot); }
+            dot.style.left = `${tip.x}px`;
+            dot.style.top = `${tip.y}px`;
+            dot.style.opacity = tip.vis ? "1" : "0";
+          }
+        }
+        svg.innerHTML = html;
+        for (const [key, dot] of dots) if (!seen.has(key)) { dot.remove(); dots.delete(key); }
+      }
 
       // the hover label follows its city
       const label = labelRef.current;
@@ -285,6 +359,7 @@ export function HeroGlobe({ onHoverChange }: { onHoverChange?: (name: string | n
         style={{ width: "100%", height: "100%", aspectRatio: "1 / 1", cursor, touchAction: "pan-y" }}
       />
       <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+        <svg ref={linesRef} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }} aria-hidden="true" />
         <div ref={burstLayerRef} />
         <div
           ref={labelRef}

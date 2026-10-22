@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type RefObject } from "react";
 
 export type Pt = { x: number; y: number };
 export type WorldMap = {
@@ -57,4 +57,23 @@ export function useNarrow(breakpoint = 900) {
     return () => { cancelAnimationFrame(raf); mq.removeEventListener("change", update); };
   }, [breakpoint]);
   return narrow;
+}
+
+/* seconds since the element scrolled into view (0 while it is out of view; restarts each time it comes back) */
+export function useInViewClock<T extends Element>(ref: RefObject<T | null>, threshold = 0.35) {
+  const [t, setT] = useState(0);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let raf = 0, t0 = 0;
+    const tick = () => { setT((performance.now() - t0) / 1000); raf = requestAnimationFrame(tick); };
+    const io = new IntersectionObserver(([e]) => {
+      cancelAnimationFrame(raf);
+      if (e.isIntersecting) { t0 = performance.now(); raf = requestAnimationFrame(tick); }
+      else setT(0);
+    }, { threshold });
+    io.observe(el);
+    return () => { io.disconnect(); cancelAnimationFrame(raf); };
+  }, [ref, threshold]);
+  return t;
 }

@@ -2,10 +2,13 @@
 
 /* Turumba Landing — the home page. Ported from Claude Design "Turumba Landing.dc.html". */
 
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import WaitingListModal from "@/components/WaitingListModal";
 import { Badge, Button, Icon } from "./ds";
 import { Reveal } from "./Reveal";
 import { TurumbaHero, TurumbaJourneyStrip, TurumbaWordCycle } from "./TurumbaHero";
+import { VisionPlayer } from "./VisionPlayer";
 import dynamic from "next/dynamic";
 
 /* The scroll story is pure animation driven by trig maths; server and browser round the last decimal differently,
@@ -57,50 +60,66 @@ const eyebrow = (color: string) => ({ fontSize: 13, fontWeight: 700, letterSpaci
 const h2 = { margin: 0, fontSize: 46, lineHeight: 1.08, fontWeight: 700, letterSpacing: "-0.02em", color: "#1565c0", textWrap: "pretty" as const };
 const lead = { margin: 0, fontSize: 17, lineHeight: 1.6, color: "#363636", textWrap: "pretty" as const };
 
+// the partners hero's slide-up: from 110% below its mask to rest, 0.8s, ease [0.16, 1, 0.3, 1]
+const slideUp = (delay: number) => ({
+  initial: { y: "110%" },
+  animate: { y: 0 },
+  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay },
+});
+
 const openWaitingList = () => window.dispatchEvent(new Event("open-waiting-list"));
 
 export default function HomeLanding() {
+  // partners-page hero motion: lines slide up from behind a mask, and the copy drifts down slower than the page on scroll
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+
   return (
     <div className="turumba-home">
       {/* Hero */}
-      <section data-screen-label="Hero" style={{ position: "relative", minHeight: "max(112vh, 860px)", color: "#ffffff", overflow: "hidden", display: "flex", flexDirection: "column" }}>
+      <section ref={heroRef} data-screen-label="Hero" style={{ position: "relative", minHeight: "max(100vh, 64vw, 820px)", color: "#ffffff", overflow: "hidden", display: "flex", flexDirection: "column" }}>
         <TurumbaHero />
 
         {/* space for the shared fixed navbar (72px) */}
         <div style={{ height: 72, flex: "none" }} />
 
         {/* hero copy — same treatment as the partners page hero: pill tag, 96px headline, 28px tagline, slide-up reveal */}
-        <div data-rs="heropad" style={{ position: "relative", zIndex: 2, flex: 1, display: "flex", alignItems: "center", padding: "150px var(--th-gutter) 120px", pointerEvents: "none" }}>
+        <motion.div data-rs="heropad" style={{ y: textY, position: "relative", zIndex: 2, flex: 1, display: "flex", alignItems: "flex-start", padding: "calc(clamp(28px, 8vh, 96px) + 64px) var(--th-gutter) 96px", pointerEvents: "none" }}>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", pointerEvents: "auto", width: "fit-content", maxWidth: "100%" }}>
-            <div className="th-mask" style={{ marginBottom: 52 }}>
-              <div data-rs="pill" className="th-slide" style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", borderRadius: 9999, background: "rgba(255,255,255,0.1)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", color: "#ffffff", fontSize: 20, lineHeight: "24px", fontWeight: 500, animationDelay: "0.2s" }}>
+            <div className="th-mask" style={{ marginBottom: 24 }}>
+              <motion.div data-rs="pill" {...slideUp(0.2)} style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", borderRadius: 9999, background: "rgba(255,255,255,0.1)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", color: "#ffffff", fontSize: 20, lineHeight: "24px", fontWeight: 500 }}>
                 <Icon name="Megaphone" size={20} />
                 <TurumbaWordCycle />
-              </div>
+              </motion.div>
             </div>
             <div className="th-mask">
-              <h1 data-rs="h1" className="th-slide" style={{ margin: 0, paddingBottom: 16, color: "#ffffff", fontSize: 96, lineHeight: "86px", fontWeight: 700, letterSpacing: "-0.02em", filter: "drop-shadow(0 10px 8px rgba(0,0,0,0.04)) drop-shadow(0 4px 3px rgba(0,0,0,0.1))", animationDelay: "0.3s" }}>
-                One platform to message,<br className="th-br" /> automate, and engage —<br className="th-br" /> <span style={{ color: "#1c4bd1" }}>powered by AI.</span>
-              </h1>
+              <motion.h1 data-rs="h1" {...slideUp(0.3)} style={{ margin: 0, paddingBottom: 16, color: "#ffffff", fontSize: 96, lineHeight: "86px", fontWeight: 700, letterSpacing: "-0.02em", filter: "drop-shadow(0 10px 8px rgba(0,0,0,0.04)) drop-shadow(0 4px 3px rgba(0,0,0,0.1))" }}>
+                One platform to message,<br className="th-br" /> automate, and engage —<br className="th-br" /> <span className="th-grad-text">powered by AI.</span>
+              </motion.h1>
             </div>
             <div className="th-mask" style={{ marginTop: 32 }}>
-              <p data-rs="tagline" className="th-slide" style={{ margin: 0, maxWidth: 896, fontSize: 28, lineHeight: "35px", fontWeight: 400, color: "rgba(255,255,255,0.8)", animationDelay: "0.4s" }}>
+              <motion.p data-rs="tagline" {...slideUp(0.4)} style={{ margin: 0, maxWidth: 896, fontSize: 28, lineHeight: "35px", fontWeight: 400, color: "rgba(255,255,255,0.8)" }}>
                 Conversations move with the person, not the platform.<br className="th-br" /> One inbox, one contact record, one history —<br className="th-br" /> across every channel your team already uses.
-              </p>
+              </motion.p>
             </div>
             <div className="th-mask" style={{ padding: 2, margin: "46px -2px -2px" }}>
-              <div data-rs="wrap" className="th-slide" style={{ display: "flex", alignItems: "center", gap: 14, animationDelay: "0.5s" }}>
+              <motion.div data-rs="wrap" {...slideUp(0.5)} style={{ display: "flex", alignItems: "center", gap: 14 }}>
                 <Button variant="primary" size="lg" iconAfter="ArrowRight">Start now for free</Button>
                 <a href="#vision" className="th-ghost-btn" style={{ display: "inline-flex", alignItems: "center", gap: 10, height: 44, padding: "0 24px", borderRadius: 9999, border: "1px solid rgba(255,255,255,0.4)", color: "#ffffff", fontSize: 15, fontWeight: 500 }}>
                   <Icon name="Play" size={16} />
                   Watch the vision
                 </a>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div data-rs="pad" style={{ position: "relative", zIndex: 2, padding: "0 var(--th-gutter) 56px", pointerEvents: "none" }}>
+      </section>
+
+      {/* One person · one journey — its own band under the hero, so it never sits on top of the globe */}
+      <section data-screen-label="Journey" style={{ position: "relative", background: "#041426", color: "#ffffff" }}>
+        <div data-rs="pad" style={{ position: "relative", zIndex: 2, padding: "8px var(--th-gutter) 72px", pointerEvents: "none" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 22 }}>
             <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(161,193,230,0.9)" }}>One person · one journey</span>
             <div style={{ flex: 1, height: 1, background: "rgba(161,193,230,0.2)" }} />
@@ -144,7 +163,7 @@ export default function HomeLanding() {
           </Reveal>
           <Reveal data-rs="grid4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
             {CAPS.map((c) => (
-              <div key={c.name} className="th-cap-card" style={{ background: "#ffffff", border: "1px solid #e5e5e5", borderRadius: 8, padding: 24, display: "flex", flexDirection: "column", gap: 16, boxShadow: "0 1px 2px rgba(6,30,58,0.05)" }}>
+              <div key={c.name} className="th-cap-card" style={{ background: "#ffffff", border: "none", borderRadius: 12, padding: 24, display: "flex", flexDirection: "column", gap: 16, boxShadow: "0 1px 2px rgba(6,30,58,0.05)" }}>
                 <div style={{ width: 44, height: 44, borderRadius: 8, background: "rgba(21,101,192,0.1)", border: "1px solid rgba(21,101,192,0.2)", display: "flex", alignItems: "center", justifyContent: "center", color: "#1565c0" }}>
                   <Icon name={c.icon} size={20} />
                 </div>
@@ -230,28 +249,30 @@ export default function HomeLanding() {
             </div>
             <div style={{ fontSize: 13, color: "rgba(161,193,230,0.9)", whiteSpace: "nowrap" }}>3:41 · sound on</div>
           </Reveal>
-          <Reveal style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", borderRadius: 8, overflow: "hidden", border: "1px solid rgba(161,193,230,0.2)", boxShadow: "0 24px 60px -28px rgba(6,30,58,0.9)", background: "#041426" }}>
-            <iframe src="/vision/index.html" title="Turumba vision video" allow="autoplay; fullscreen" loading="lazy"
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }} />
+          <Reveal>
+            <VisionPlayer />
           </Reveal>
         </div>
       </section>
 
       {/* CTA — a Blue Ocean → Indigo field with the trumpet sound-wave pattern (Brand Bible · Gradient 3, Pattern) */}
       <section data-screen-label="Call to action" data-rs="pad pady" className="th-pattern"
-        style={{ position: "relative", overflow: "hidden", padding: "120px var(--th-gutter)", background: "linear-gradient(135deg, #1565c0 0%, #1c4bd1 55%, #371cd1 100%)", color: "#ffffff" }}>
-        <Reveal style={{ position: "relative", zIndex: 1, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 24 }}>
-          <blockquote style={{ margin: "0 0 12px", maxWidth: 760, fontSize: 18, lineHeight: 1.6, fontWeight: 500, color: "rgba(255,255,255,0.86)", textWrap: "pretty" }}>
-            “Go ye therefore, and teach all nations… and, lo, I am with you alway, even unto the end of the world.”
-            <span style={{ display: "block", marginTop: 10, fontSize: 12, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#cfdff2" }}>Matthew 28:19–20</span>
-          </blockquote>
-          <div style={eyebrow("#cfdff2")}>Get started</div>
-          <h2 data-rs="h2xl" style={{ margin: 0, fontSize: 52, lineHeight: 1.05, fontWeight: 700, letterSpacing: "-0.03em", color: "#ffffff", maxWidth: 900, textWrap: "pretty" }}>Help shape what comes next.</h2>
-          <p style={{ ...lead, color: "rgba(255,255,255,0.86)", maxWidth: 620 }}>We are inviting builders, ministries, churches, innovators, technology partners, and Kingdom organizations to join us. Get early access, help shape the platform, explore collaboration.</p>
-          <div data-rs="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, marginTop: 8 }}>
-            <Button variant="inverse" size="lg" iconAfter="ArrowRight" onClick={openWaitingList}>Join the waiting list</Button>
-            <Button variant="outline-light" size="lg" onClick={openWaitingList}>Request a demo</Button>
+        style={{ position: "relative", overflow: "hidden", padding: "120px var(--th-gutter)", background: "radial-gradient(60% 70% at 100% 0%, #3a00c8 0%, rgba(58,0,200,0) 100%), radial-gradient(55% 60% at 100% 100%, #03e6ff 0%, rgba(3,230,255,0) 100%), linear-gradient(160deg, #2a45b8 0%, #1c4bd1 50%, #1565c0 100%)", color: "#ffffff" }}>
+        {/* hierarchy: 1 headline → 2 one-line why → 3 one action → 4 the verse as a quiet sign-off */}
+        <Reveal style={{ position: "relative", zIndex: 1, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", maxWidth: 960, margin: "0 auto" }}>
+          <h2 data-rs="h2xl" style={{ margin: 0, fontSize: 72, lineHeight: 1, fontWeight: 700, letterSpacing: "-0.035em", color: "#ffffff", textWrap: "balance" }}>Help shape what comes next.</h2>
+          <p style={{ margin: "24px 0 0", maxWidth: 640, fontSize: 20, lineHeight: 1.55, color: "rgba(255,255,255,0.85)", textWrap: "pretty" }}>
+            We are inviting builders, ministries, churches, innovators, technology partners, and Kingdom organizations to join us. Get early access, help shape the platform, explore collaboration.
+          </p>
+          <div style={{ marginTop: 40 }}>
+            <Button variant="inverse" size="lg" iconAfter="ArrowRight" onClick={openWaitingList} style={{ height: 56, padding: "0 32px", fontSize: 17, fontWeight: 600, boxShadow: "none" }}>Join the waiting list</Button>
           </div>
+          <figure style={{ margin: "72px 0 0", paddingTop: 28, borderTop: "1px solid rgba(255,255,255,0.18)", maxWidth: 620 }}>
+            <blockquote style={{ margin: 0, fontSize: 16, lineHeight: 1.6, fontStyle: "italic", fontWeight: 400, color: "rgba(255,255,255,0.72)", textWrap: "pretty" }}>
+              “Go ye therefore, and teach all nations… and, lo, I am with you alway, even unto the end of the world.”
+            </blockquote>
+            <figcaption style={{ marginTop: 10, fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)" }}>Matthew 28:19–20</figcaption>
+          </figure>
         </Reveal>
       </section>
 

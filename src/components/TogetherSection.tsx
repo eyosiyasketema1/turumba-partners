@@ -37,7 +37,7 @@ const items = [
 export default function TogetherSection() {
   return (
     <section className="w-full bg-white text-black pb-32">
-      <div className="max-w-[1440px] mx-auto w-full px-12">
+      <div className="max-w-[1440px] mx-auto w-full px-6">
         
         {/* Header */}
         <div className="flex flex-col mb-12 lg:mb-16">

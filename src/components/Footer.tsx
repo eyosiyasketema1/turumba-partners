@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function Footer() {
   return (
     <footer className="w-full bg-white text-black pt-32 pb-10">
-      <div className="max-w-[1440px] mx-auto w-full px-12">
+      <div className="max-w-[1440px] mx-auto w-full px-6">
         
         {/* Top CTA Section */}
         <div className="flex flex-col items-center text-center mb-28">

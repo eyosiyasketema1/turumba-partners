@@ -45,7 +45,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 3.6, duration: 1 }}
-              className="absolute left-12 bottom-[calc(20%-40px)] text-white/50 text-[14px] font-light tracking-wide"
+              className="absolute left-6 bottom-[calc(20%-40px)] text-white/50 text-[14px] font-light tracking-wide"
             >
               Early access. Pilot partners collaboration
             </motion.div>
@@ -65,7 +65,7 @@ export default function Home() {
         {/* The Parallax Text */}
         <motion.main 
           style={{ y: textY }}
-          className="flex-1 relative z-10 flex flex-col justify-center px-12 max-w-[1440px] mx-auto w-full h-full pointer-events-none"
+          className="flex-1 relative z-10 flex flex-col justify-center px-6 max-w-[1440px] mx-auto w-full h-full pointer-events-none"
         >
           <div className="text-left w-fit max-w-full pointer-events-auto flex flex-col items-start">
             

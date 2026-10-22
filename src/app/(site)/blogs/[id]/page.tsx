@@ -23,7 +23,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
         style={{ scaleX: scrollYProgress }}
       />
       
-      <article className="max-w-[1440px] mx-auto px-6 md:px-12 pt-32 pb-24">
+      <article className="max-w-[1440px] mx-auto px-6 pt-32 pb-24">
         
         {/* Back Link (Static) */}
         <div className="mb-12">

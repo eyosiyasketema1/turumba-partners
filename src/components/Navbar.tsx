@@ -59,7 +59,7 @@ export default function Navbar() {
       {/* Background Layer (No Blur) */}
       <div className={`absolute inset-0 transition-colors duration-500 -z-10 ${solidBg ? "bg-white" : "bg-transparent"}`} />
 
-      <div className={`w-full h-[72px] px-6 md:px-12 max-w-[1440px] mx-auto relative z-10 overflow-hidden transition-colors duration-500 ${isLightContent ? "text-black" : "text-white"}`}>
+      <div className={`w-full h-[72px] px-6 max-w-[1440px] mx-auto relative z-10 overflow-hidden transition-colors duration-500 ${isLightContent ? "text-black" : "text-white"}`}>
         <motion.div
           initial={{ y: "-100%" }}
           animate={{ y: 0 }}
@@ -128,7 +128,7 @@ export default function Navbar() {
       {/* Mobile / tablet menu */}
       {menuOpen && (
         <div className="xl:hidden bg-white text-black border-t border-black/5 shadow-[0_12px_24px_-12px_rgba(15,23,42,0.18)]">
-          <div className="px-6 md:px-12 max-w-[1440px] mx-auto py-4 flex flex-col">
+          <div className="px-6 max-w-[1440px] mx-auto py-4 flex flex-col">
             {LINKS.map((l) => {
               const active = l.match?.(pathname) ?? false;
               return (

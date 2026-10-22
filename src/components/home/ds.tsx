@@ -5,22 +5,55 @@
 
 import { createElement, useState, type CSSProperties, type ReactNode } from "react";
 import {
-  ArrowRight, Bell, BookOpen, Brain, Building2, CalendarClock, Church, CircleHelp, Clock, Eye, FileText,
-  Globe, HeartHandshake, History, Inbox, Languages, Layers, Lightbulb, Mail, Megaphone, Menu, MessageCircle,
-  MessageSquare, MessageSquareText, MessagesSquare, MousePointerClick, Network, PenTool, Play, Radio,
-  Route, Scale, Send, Sparkles, Sun, TrendingUp, TriangleAlert, User, UserCheck, Users, Workflow,
-  type LucideIcon,
-} from "lucide-react";
+  IconAlertTriangle, IconArrowRight, IconBell, IconBook, IconBrain, IconBrandMessenger, IconBrandTelegram, IconBrandWhatsapp,
+  IconBroadcast, IconBuildingChurch, IconBuildingCommunity, IconBulb, IconCalendarTime, IconClick, IconClock, IconEye,
+  IconFileText, IconHeartHandshake, IconHelpCircle, IconHistory, IconInbox, IconLanguage, IconMail, IconMenu2, IconMessage,
+  IconMessage2, IconMessageCircle, IconMessages, IconNetwork, IconPencil, IconPlayerPlay, IconRoute, IconScale, IconSend,
+  IconSitemap, IconSparkles, IconSpeakerphone, IconStack2, IconSun, IconTrendingUp, IconUser, IconUserCheck, IconUsers, IconWorld,
+  IconBrandMessengerFilled, IconBrandWhatsappFilled, IconMailFilled, IconMessageFilled, IconWorldFilled,
+  IconMaximize, IconPlayerPauseFilled, IconPlayerPlayFilled, IconRotateClockwise, IconVolume, IconVolumeOff,
+  type Icon as TablerIcon,
+} from "@tabler/icons-react";
+import { forwardRef, type SVGProps } from "react";
 
-const ICONS: Record<string, LucideIcon> = {
-  ArrowRight, Bell, BookOpen, Brain, Building2, CalendarClock, Church, CircleHelp, Clock, Eye, FileText,
-  Globe, HeartHandshake, History, Inbox, Languages, Layers, Lightbulb, Mail, Megaphone, Menu, MessageCircle,
-  MessageSquare, MessageSquareText, MessagesSquare, MousePointerClick, Network, PenTool, Play, Radio,
-  Route, Scale, Send, Sparkles, Sun, TrendingUp, TriangleAlert, User, UserCheck, Users, Workflow,
+/* Tabler has no filled Telegram mark, so this is one drawn to the same 24px grid: the brand's circle with the paper plane cut out. */
+const IconBrandTelegramFilled = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement> & { size?: number | string; stroke?: number | string; color?: string }>(
+  function IconBrandTelegramFilled({ size = 24, color = "currentColor", stroke: _stroke, ...rest }, ref) {
+    void _stroke;
+    return (
+      <svg ref={ref} xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill={color} {...rest}>
+        <path fillRule="evenodd" d="M12 2a10 10 0 1 1 0 20a10 10 0 0 1 0-20zm4.38 6.2c.3-.12.6.14.52.47l-1.7 8.03c-.1.45-.58.64-.95.38l-2.6-1.92-1.3 1.25c-.15.15-.4.08-.45-.12l-.47-1.95-2.33-.77c-.36-.12-.38-.62-.03-.76l9.31-3.6zm-1.94 2.33l-4.7 3.27.35 1.42.12-1.04 4.23-3.65z" />
+      </svg>
+    );
+  },
+) as unknown as TablerIcon;
+
+/* Icons come from Tabler (tabler.io/icons) — 24px grid, 2px stroke, matching the brand bible's iconography spec.
+   Keys keep the names used across the page, so call sites read naturally. Brand marks use the official brand icons. */
+const ICONS: Record<string, TablerIcon> = {
+  ArrowRight: IconArrowRight, Bell: IconBell, BookOpen: IconBook, Brain: IconBrain, Building2: IconBuildingCommunity,
+  CalendarClock: IconCalendarTime, Church: IconBuildingChurch, CircleHelp: IconHelpCircle, Clock: IconClock, Eye: IconEye,
+  FileText: IconFileText, Globe: IconWorld, HeartHandshake: IconHeartHandshake, History: IconHistory, Inbox: IconInbox,
+  Languages: IconLanguage, Layers: IconStack2, Lightbulb: IconBulb, Mail: IconMail, Megaphone: IconSpeakerphone, Menu: IconMenu2,
+  MessageCircle: IconMessageCircle, MessageSquare: IconMessage, MessageSquareText: IconMessage2, MessagesSquare: IconMessages,
+  MousePointerClick: IconClick, Network: IconNetwork, PenTool: IconPencil, Play: IconPlayerPlay, Radio: IconBroadcast,
+  Route: IconRoute, Scale: IconScale, Send: IconSend, Sparkles: IconSparkles, Sun: IconSun, TrendingUp: IconTrendingUp,
+  TriangleAlert: IconAlertTriangle, User: IconUser, UserCheck: IconUserCheck, Users: IconUsers, Workflow: IconSitemap,
+  // brand icons
+  BrandWhatsapp: IconBrandWhatsapp, BrandTelegram: IconBrandTelegram, BrandMessenger: IconBrandMessenger,
+  // filled variants (channel marks in the story)
+  BrandWhatsappFilled: IconBrandWhatsappFilled, BrandTelegramFilled: IconBrandTelegramFilled, BrandMessengerFilled: IconBrandMessengerFilled,
+  MessageFilled: IconMessageFilled, MailFilled: IconMailFilled, GlobeFilled: IconWorldFilled,
+  // video player
+  PlayFilled: IconPlayerPlayFilled, PauseFilled: IconPlayerPauseFilled, Replay: IconRotateClockwise,
+  Volume: IconVolume, VolumeOff: IconVolumeOff, Maximize: IconMaximize,
 };
 
+/* official brand colours for channel marks */
+export const BRAND_COLORS = { whatsapp: "#25D366", telegram: "#26A5E4", messenger: "#0084FF" } as const;
+
 /* accepts PascalCase ("MessageCircle") or kebab-case ("message-circle") Lucide names */
-function resolveIcon(name: string): LucideIcon | null {
+function resolveIcon(name: string): TablerIcon | null {
   if (ICONS[name]) return ICONS[name];
   const pascal = name.replace(/(^|-)([a-z0-9])/g, (_, __, c: string) => c.toUpperCase());
   return ICONS[pascal] ?? null;
@@ -30,7 +63,7 @@ export function Icon({ name, size = 16, color, strokeWidth = 2 }: { name: string
   const glyph = resolveIcon(name);
   if (!glyph) return null;
   // icons come from a static lookup table, so createElement here never remounts
-  return createElement(glyph, { size, color: color ?? "currentColor", strokeWidth, style: { flex: "none" }, "aria-hidden": true });
+  return createElement(glyph, { size, color: color ?? "currentColor", stroke: strokeWidth, style: { flex: "none" }, "aria-hidden": true });
 }
 
 type ButtonVariant = "primary" | "outline" | "secondary" | "ghost" | "inverse" | "outline-light";
@@ -98,12 +131,12 @@ export function Badge({ variant = "default", children }: { variant?: keyof typeo
 }
 
 const CHANNELS = {
-  whatsapp: { label: "WhatsApp", icon: "message-circle", color: "#22c55e", deep: "#16a34a" },
-  sms: { label: "SMS", icon: "message-square", color: "#3b82f6", deep: "#1565c0" },
-  email: { label: "Email", icon: "mail", color: "#8b5cf6", deep: "#7c3aed" },
-  telegram: { label: "Telegram", icon: "send", color: "#0ea5e9", deep: "#0284c7" },
-  messenger: { label: "Messenger", icon: "messages-square", color: "#1565c0", deep: "#1565c0" },
-  smpp: { label: "SMPP", icon: "network", color: "#64748b", deep: "#475569" },
+  whatsapp: { label: "WhatsApp", icon: "BrandWhatsapp", color: "#25D366", deep: "#25D366" },
+  sms: { label: "SMS", icon: "message-square", color: "#1565c0", deep: "#1565c0" },
+  email: { label: "Email", icon: "mail", color: "#1565c0", deep: "#1565c0" },
+  telegram: { label: "Telegram", icon: "BrandTelegram", color: "#26A5E4", deep: "#26A5E4" },
+  messenger: { label: "Messenger", icon: "BrandMessenger", color: "#0084FF", deep: "#0084FF" },
+  smpp: { label: "SMPP", icon: "network", color: "#1565c0", deep: "#1565c0" },
 };
 export type Channel = keyof typeof CHANNELS;
 

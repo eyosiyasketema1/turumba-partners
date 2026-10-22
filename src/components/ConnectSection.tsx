@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 export default function ConnectSection() {
   return (
     <section className="w-full bg-white text-black py-32 overflow-hidden">
-      <div className="max-w-[1440px] mx-auto w-full px-12">
+      <div className="max-w-[1440px] mx-auto w-full px-6">
         
         {/* Header Row */}
         <motion.div 

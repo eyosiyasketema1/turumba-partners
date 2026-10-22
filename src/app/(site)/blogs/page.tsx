@@ -16,7 +16,7 @@ export default function BlogsPage() {
     <div className="bg-[#F7F7F7] min-h-screen text-[#1A1A1A] flex flex-col">
 
       {/* Spacer for fixed navbar */}
-      <div className="pt-32 pb-16 px-6 md:px-12 max-w-[1440px] mx-auto w-full flex-grow">
+      <div className="pt-32 pb-16 px-6 max-w-[1440px] mx-auto w-full flex-grow">
         
         {/* Header Section (Editorial Style) */}
         <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-12">

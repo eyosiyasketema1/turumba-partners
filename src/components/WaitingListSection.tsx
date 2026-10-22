@@ -41,7 +41,7 @@ const cards = [
 export default function WaitingListSection() {
   return (
     <section className="w-full bg-white text-black py-32">
-      <div className="max-w-[1440px] mx-auto w-full px-12">
+      <div className="max-w-[1440px] mx-auto w-full px-6">
         
         {/* Header */}
         <motion.div 
