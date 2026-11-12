@@ -51,6 +51,9 @@ const SS_CHAPTERS = [
 ];
 
 const FONT = "'DM Sans', system-ui, sans-serif";
+/* phones: the 1920x1080 scene is drawn into a box twice the screen width, centred on the story's focal area,
+   and the labels on it are shown at 72% size so they stay readable without crowding */
+const STAGE_VW = 186, STAGE_CX = 1180, STAGE_CHIP = 0.72;
 
 export function TurumbaStory() {
   const W = 1920, H = 1080, CH = SS_CHAPTERS.length;
@@ -63,7 +66,12 @@ export function TurumbaStory() {
     const t0 = performance.now();
     let last = t0, smooth = -1;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const phone = window.matchMedia("(max-width: 899.98px)").matches;
+    let onScreen = false, frame = 0;
     const tick = () => {
+      if (!onScreen) { raf = 0; return; }
+      // phones redraw at ~30fps: the story stays smooth and the page keeps up with the finger
+      if (phone && (frame++ & 1)) { raf = requestAnimationFrame(tick); return; }
       const el = ref.current, now = performance.now();
       const dt = Math.min(0.25, (now - last) / 1000);
       last = now;
@@ -78,8 +86,13 @@ export function TurumbaStory() {
       }
       raf = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    // run the loop only while the story is (nearly) on screen
+    const io = new IntersectionObserver(([e]) => {
+      onScreen = e.isIntersecting;
+      if (onScreen && !raf) { last = performance.now(); raf = requestAnimationFrame(tick); }
+    }, { rootMargin: "200px 0px" });
+    if (ref.current) io.observe(ref.current);
+    return () => { io.disconnect(); cancelAnimationFrame(raf); };
   }, [CH]);
 
   const P = st.p, t = st.t, narrow = st.w < 1280;
@@ -184,7 +197,10 @@ export function TurumbaStory() {
   return (
     <div ref={ref} style={{ position: "relative", height: `${CH * 100 + 40}vh`, background: SS_G900 }}>
       <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
-        <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" style={{ position: "absolute", left: 0, right: 0, top: 0, height: narrow ? "58%" : "100%", width: "100%" }}>
+        <div style={narrow
+          ? { position: "absolute", width: `${STAGE_VW}vw`, aspectRatio: "16 / 9", left: `${50 - (STAGE_CX / W) * STAGE_VW}vw`, top: 30 }
+          : { position: "absolute", inset: 0 }}>
+        <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio={narrow ? "xMidYMid meet" : "xMidYMid slice"} style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
           <defs>
             <radialGradient id="ss-person-glow"><stop offset="0%" stopColor="#1565c0" stopOpacity="0.55" /><stop offset="100%" stopColor="#1565c0" stopOpacity="0" /></radialGradient>
           </defs>
@@ -235,7 +251,9 @@ export function TurumbaStory() {
         </svg>
 
         {/* HTML overlays (percent-positioned in the 1920x1080 space) */}
-        <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: narrow ? "58%" : "100%", pointerEvents: "none", transform: narrow ? "scale(0.62)" : "none", transformOrigin: "50% 50%" }}>
+        <div style={narrow
+          ? { position: "absolute", left: 0, top: 0, width: `${100 / STAGE_CHIP}%`, height: `${100 / STAGE_CHIP}%`, pointerEvents: "none", transform: `scale(${STAGE_CHIP})`, transformOrigin: "0 0" }
+          : { position: "absolute", inset: 0, pointerEvents: "none" }}>
           {fragO > 0.005 && (
             <div style={{ position: "absolute", inset: 0, opacity: fragO }}>
               {SS_STEPS.map((_, i) => { const si = SS_SILOS[ssSilo(i)]; return tile(`t${i}`, SS_CH[i % 5], SS_WP[i].x + si.dx * frac, 380 + si.dy * frac, ssOut((lp - 0.02 - i * 0.02) / 0.05), 1 - 0.12 * frac); })}
@@ -283,12 +301,15 @@ export function TurumbaStory() {
           )}
         </div>
 
+        </div>
+
         {/* chapter copy */}
         <div style={narrow
-          ? { position: "absolute", left: 24, right: 24, bottom: 56, display: "flex", alignItems: "flex-end", pointerEvents: "none", minHeight: 260 }
+          // phones: the copy starts right under the drawing (whose content ends ~78% down its 16:9 box), not pinned to the bottom
+          ? { position: "absolute", left: 24, right: 24, top: `min(30px + ${(STAGE_VW * 0.5625 * 0.78).toFixed(1)}vw, 100svh - 430px)`, bottom: 0, display: "flex", alignItems: "flex-start", pointerEvents: "none" }
           : { position: "absolute", left: "var(--th-gutter, 24px)", top: 0, bottom: 0, width: 540, display: "flex", alignItems: "center", pointerEvents: "none" }}>
           <div style={narrow
-            ? { position: "absolute", left: -24, right: -24, top: -140, bottom: -56, background: "linear-gradient(180deg, rgba(4,20,38,0) 0%, rgba(4,20,38,0.92) 30%, rgba(4,20,38,1) 100%)" }
+            ? { position: "absolute", left: -24, right: -24, top: -48, bottom: -56, background: "linear-gradient(180deg, rgba(4,20,38,0) 0%, rgba(4,20,38,0.9) 18%, rgba(4,20,38,1) 100%)" }
             : { position: "absolute", left: "calc(-1 * var(--th-gutter, 24px))", top: 0, bottom: 0, width: "calc(704px + var(--th-gutter, 24px))", background: "linear-gradient(90deg, rgba(4,20,38,0.96) 0%, rgba(4,20,38,0.85) 60%, rgba(4,20,38,0) 100%)" }} />
           {SS_CHAPTERS.map((c, i) => {
             const o = ssEase(ssWin(P, i + 0.02, i + 0.98, 0.16));
@@ -296,10 +317,10 @@ export function TurumbaStory() {
             // incoming copy rises in, outgoing copy lifts away — with a soft blur, so chapters dissolve into each other
             const dir = P < i + 0.5 ? 1 : -1, y = (1 - o) * 28 * dir;
             return (
-              <div key={i} style={{ position: "absolute", left: 0, right: 0, opacity: o, transform: `translate3d(0, ${y.toFixed(1)}px, 0)`, filter: o < 0.995 ? `blur(${((1 - o) * 6).toFixed(2)}px)` : "none", willChange: "transform, opacity, filter", display: "flex", flexDirection: "column", gap: narrow ? 12 : 18 }}>
+              <div key={i} style={{ position: "absolute", left: 0, right: 0, opacity: o, transform: `translate3d(0, ${y.toFixed(1)}px, 0)`, filter: !narrow && o < 0.995 ? `blur(${((1 - o) * 6).toFixed(2)}px)` : "none", willChange: narrow ? "transform, opacity" : "transform, opacity, filter", display: "flex", flexDirection: "column", gap: narrow ? 12 : 18 }}>
                 {/* chapter marker — numeral, rule, name (the brand bible's section-divider pattern) */}
                 <div style={{ display: "flex", alignItems: "flex-end", gap: 16 }}>
-                  <div style={{ font: `700 ${narrow ? 52 : 88}px ${FONT}`, lineHeight: 0.82, letterSpacing: "-0.04em", color: "transparent", WebkitTextStroke: `1.5px ${SS_BLUE}` }}>{c.eyebrow.split(" · ")[0]}</div>
+                  <div style={{ font: `700 ${narrow ? 40 : 88}px ${FONT}`, lineHeight: 0.82, letterSpacing: "-0.04em", color: "transparent", WebkitTextStroke: `1.5px ${SS_BLUE}` }}>{c.eyebrow.split(" · ")[0]}</div>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, paddingBottom: narrow ? 2 : 6 }}>
                     <span style={{ width: 28, height: 1, background: SS_BLUE }} />
                     <span style={{ font: `700 12px ${FONT}`, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.7)" }}>{c.eyebrow.split(" · ")[1]}</span>
@@ -315,7 +336,7 @@ export function TurumbaStory() {
                     })}
                   </div>
                 )}
-                <div style={{ font: `700 ${narrow ? 30 : 52}px ${FONT}`, lineHeight: 1.04, letterSpacing: "-0.025em", color: SS_CREAM, textWrap: "balance", marginTop: narrow ? 2 : 6 }}>{c.h}</div>
+                <div style={{ font: `700 ${narrow ? 27 : 52}px ${FONT}`, lineHeight: 1.04, letterSpacing: "-0.025em", color: SS_CREAM, textWrap: "balance", marginTop: narrow ? 2 : 6 }}>{c.h}</div>
                 <div style={{ font: `400 ${narrow ? 15 : 18}px ${FONT}`, lineHeight: 1.6, color: "rgba(255,255,255,0.75)", textWrap: "pretty", maxWidth: 480 }}>{c.p}</div>
                 <div style={{ display: "flex", gap: 14, alignItems: "flex-start", marginTop: narrow ? 4 : 14, maxWidth: 440 }}>
                   <div style={{ width: 2, alignSelf: "stretch", background: SS_BLUE, borderRadius: 2, flex: "none" }} />

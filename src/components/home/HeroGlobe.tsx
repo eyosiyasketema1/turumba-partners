@@ -125,7 +125,7 @@ export function HeroGlobe({ onHoverChange }: { onHoverChange?: (name: string | n
     const now = () => (performance.now() - t0) / 1000;
 
     const globe = createGlobe(canvas, {
-      devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+      devicePixelRatio: Math.min(window.devicePixelRatio || 1, window.matchMedia("(max-width: 899.98px)").matches ? 1.5 : 2),
       width: 1000,
       height: 1000,
       phi,
@@ -231,11 +231,15 @@ export function HeroGlobe({ onHoverChange }: { onHoverChange?: (name: string | n
       window.setTimeout(() => ring.remove(), 1000);
     };
 
-    let raf = 0;
+    let raf = 0, onScreen = true, frame = 0;
+    const phone = window.matchMedia("(max-width: 899.98px)").matches;
     const tick = () => {
+      if (!onScreen || document.hidden) { raf = 0; return; } // stop drawing once the hero is scrolled away
+      // on phones the globe is a soft backdrop: ~30fps keeps it moving without starving scrolling
+      if (phone && (frame++ & 1)) { raf = requestAnimationFrame(tick); return; }
       const t = now();
       if (!dragging) {
-        if (!reduceMotion && hover < 0 && t > SPIN_DELAY) spin += 0.0012; // slow turn after a short pause, stops while a city is hovered
+        if (!reduceMotion && hover < 0 && t > SPIN_DELAY) spin += phone ? 0.0024 : 0.0012; // slow turn after a short pause, stops while a city is hovered
         theta += (BASE_THETA + (ptrNY - 0.5) * 0.22 - theta) * 0.05; // follow the pointer, ease back
       }
       phi += (BASE_PHI + spin + (ptrNX - 0.5) * 0.35 - phi) * 0.08;
@@ -336,8 +340,14 @@ export function HeroGlobe({ onHoverChange }: { onHoverChange?: (name: string | n
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
+    const wake = () => { if (onScreen && !document.hidden && !raf) raf = requestAnimationFrame(tick); };
+    const io = new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; wake(); });
+    io.observe(host);
+    document.addEventListener("visibilitychange", wake);
 
     return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", wake);
       cancelAnimationFrame(raf);
       canvas.removeEventListener("pointerdown", onDown);
       canvas.removeEventListener("pointermove", onMove);

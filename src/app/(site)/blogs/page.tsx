@@ -19,12 +19,12 @@ export default function BlogsPage() {
       <div className="pt-32 pb-16 px-6 max-w-[1440px] mx-auto w-full flex-grow">
         
         {/* Header Section (Editorial Style) */}
-        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-8 mb-12">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-[64px] md:text-[80px] lg:text-[110px] leading-[0.9] font-medium tracking-tight uppercase text-black"
+            className="text-[52px] sm:text-[64px] md:text-[80px] lg:text-[110px] leading-[0.9] font-medium tracking-tight uppercase text-black"
           >
             Insights &<br/>Updates
           </motion.h1>

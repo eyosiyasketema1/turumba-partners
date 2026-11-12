@@ -29,7 +29,7 @@ export default function Home() {
       {/* Hero Section Container: Cropped to max 115vh to reveal a bit more of the image */}
       <div 
         ref={ref}
-        className="relative flex flex-col w-full aspect-[1440/1024] max-h-[115vh] overflow-hidden"
+        className="relative flex flex-col w-full min-h-[100svh] lg:min-h-0 lg:aspect-[1440/1024] lg:max-h-[115vh] overflow-hidden"
       >
         
         {/* The Image Container: Normal scrolling */}
@@ -45,7 +45,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 3.6, duration: 1 }}
-              className="absolute left-6 bottom-[calc(20%-40px)] text-white/50 text-[14px] font-light tracking-wide"
+              className="absolute left-6 bottom-8 lg:bottom-[calc(20%-40px)] text-white/50 text-[13px] lg:text-[14px] font-light tracking-wide"
             >
               Early access. Pilot partners collaboration
             </motion.div>
@@ -65,19 +65,19 @@ export default function Home() {
         {/* The Parallax Text */}
         <motion.main 
           style={{ y: textY }}
-          className="flex-1 relative z-10 flex flex-col justify-center px-6 max-w-[1440px] mx-auto w-full h-full pointer-events-none"
+          className="flex-1 relative z-10 flex flex-col justify-center px-6 pt-28 pb-24 lg:pt-0 lg:pb-0 max-w-[1440px] mx-auto w-full h-full pointer-events-none"
         >
           <div className="text-left w-fit max-w-full pointer-events-auto flex flex-col items-start">
             
             {/* Pill */}
-            <div className="overflow-hidden mb-[52px]">
+            <div className="overflow-hidden mb-8 lg:mb-[52px]">
               <motion.div 
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-full text-white text-[20px] leading-[24px] tracking-normal font-medium"
+                className="flex items-center gap-2 bg-white/10 lg:backdrop-blur-md px-4 py-2 lg:px-5 lg:py-2.5 rounded-full text-white text-[15px] leading-[20px] lg:text-[20px] lg:leading-[24px] tracking-normal font-medium"
               >
-                <Gift className="w-[20px] h-[20px]" />
+                <Gift className="w-4 h-4 lg:w-[20px] lg:h-[20px]" />
                 <span>An invitation to build together</span>
               </motion.div>
             </div>
@@ -88,20 +88,20 @@ export default function Home() {
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-                className="text-white text-[96px] leading-[96px] tracking-[-0.02em] font-bold drop-shadow-lg pb-4"
+                className="text-white text-[44px] leading-[1.04] sm:text-[64px] lg:text-[96px] lg:leading-[96px] tracking-[-0.02em] font-bold drop-shadow-lg pb-4 [text-wrap:balance]"
               >
-                Digital Infrastructure for <br />
+                Digital Infrastructure for <br className="hidden lg:block" />{" "}
                 Kingdom Collaboration
               </motion.h1>
             </div>
 
             {/* Tagline */}
-            <div className="overflow-hidden mt-[32px]">
+            <div className="overflow-hidden mt-4 lg:mt-[32px]">
               <motion.p 
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-                className="text-[28px] leading-[35px] tracking-normal font-normal text-white/80 max-w-4xl"
+                className="text-[18px] leading-[28px] lg:text-[28px] lg:leading-[35px] tracking-normal font-normal text-white/80 max-w-4xl"
               >
                 The future should not be built alone. <br className="hidden md:block" />
                 Turumba is being built alongside the ministries, <br className="hidden md:block" />
@@ -110,7 +110,7 @@ export default function Home() {
             </div>
 
             {/* Call to Action Button */}
-            <div className="overflow-hidden mt-[48px] rounded-full w-max">
+            <div className="overflow-hidden mt-8 lg:mt-[48px] rounded-full w-max">
               <motion.button 
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
