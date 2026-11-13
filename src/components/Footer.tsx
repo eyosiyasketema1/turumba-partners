@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Footer() {
+export default function Footer({ hideDemo = false }: { hideDemo?: boolean } = {}) {
   return (
     <footer className="w-full bg-white text-black pt-32 pb-10">
       <div className="max-w-[1440px] mx-auto w-full px-6">
@@ -26,9 +26,11 @@ export default function Footer() {
                 <path d="M8 3.33334L12.6667 8.00001L8 12.6667" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
+            {!hideDemo && (
             <button className="bg-white border border-[#E5E5E5] hover:border-[#C7C7C7] transition-colors text-[#1A1A1A] font-medium py-3.5 px-7 rounded-full text-[15px]">
               Request a demo
             </button>
+            )}
           </div>
         </div>
 
