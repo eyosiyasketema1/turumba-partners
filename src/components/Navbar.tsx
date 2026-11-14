@@ -50,8 +50,8 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Dark content (light mode) once scrolled past the dark hero, on light pages (like /blogs), or with the menu open
-  const isLightContent = isScrolled || menuOpen || pathname.startsWith("/blogs");
+  // Dark content (light mode) once scrolled past the dark hero, on light pages (/blogs, /partners), or with the menu open
+  const isLightContent = isScrolled || menuOpen || pathname.startsWith("/blogs") || pathname.startsWith("/partners");
   const solidBg = isScrolled || menuOpen;
 
   return (

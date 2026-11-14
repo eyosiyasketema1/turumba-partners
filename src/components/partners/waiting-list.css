@@ -1,0 +1,60 @@
+/* Turumba waiting-list page ("Be a partner"): base rules, motion keyframes and the design's hover / focus states */
+.wlp *{box-sizing:border-box}
+/* decorative frames and glows may extend past the screen edge on phones: clip them without creating a scroll box */
+.wlp{overflow-x:clip}
+
+.wlp :focus-visible{outline:2px solid #1565c0;outline-offset:3px;border-radius:4px}
+.wlp a{color:#1565c0;text-decoration:none}
+.wlp a:hover{color:#11519a}
+.wlp input,.wlp select,.wlp textarea,.wlp button{font-family:inherit}
+@keyframes om-fade{from{opacity:0}to{opacity:1}}
+@keyframes om-pop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes om-rail{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes om-dotin{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+@keyframes om-land{0%{opacity:0;transform:translateY(72px) scale(.5)}62%{opacity:1;transform:translateY(0) scale(1.06)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes om-ring{0%{opacity:.55;transform:scale(.7)}70%{opacity:0;transform:scale(2.3)}100%{opacity:0;transform:scale(2.3)}}
+@keyframes om-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes om-sheen{from{opacity:0}40%{opacity:.5}to{opacity:0}}
+
+.wlp .wlp-1:hover{background:#11519a !important;transform:translateY(-2px) !important}
+.wlp .wlp-2:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
+.wlp .wlp-3:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
+.wlp .wlp-4:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
+.wlp .wlp-5:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
+.wlp .wlp-6:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
+.wlp .wlp-7:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
+.wlp .wlp-8:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
+.wlp .wlp-9:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
+.wlp .wlp-10:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
+.wlp .wlp-11:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
+.wlp .wlp-12:hover{border-color:rgba(21,101,192,.6) !important;transform:translateY(-3px) !important}
+.wlp .wlp-13:hover{border-color:rgba(21,101,192,.6) !important;transform:translateY(-3px) !important}
+.wlp .wlp-14:hover{border-color:rgba(21,101,192,.6) !important;transform:translateY(-3px) !important}
+.wlp .wlp-15:hover{border-color:rgba(21,101,192,.6) !important;transform:translateY(-3px) !important}
+.wlp .wlp-16:hover{border-color:rgba(21,101,192,.6) !important;transform:translateY(-3px) !important}
+.wlp .wlp-17:hover{border-color:rgba(21,101,192,.6) !important;transform:translateY(-3px) !important}
+.wlp .wlp-18:hover{background:#11519a !important;transform:translateY(-2px) !important}
+.wlp .wlp-19:hover{border-color:#1565c0 !important;box-shadow:0 14px 34px -22px rgba(15,23,42,.5) !important;transform:translateY(-3px) !important}
+.wlp .wlp-20:hover{border-color:#1565c0 !important;box-shadow:0 14px 34px -22px rgba(15,23,42,.5) !important;transform:translateY(-3px) !important}
+.wlp .wlp-21:hover{border-color:#1565c0 !important;box-shadow:0 14px 34px -22px rgba(15,23,42,.5) !important;transform:translateY(-3px) !important}
+.wlp .wlp-22:hover{border-color:#1565c0 !important;box-shadow:0 14px 34px -22px rgba(15,23,42,.5) !important;transform:translateY(-3px) !important}
+.wlp .wlp-23:hover{background:#11519a !important;transform:translateY(-2px) !important}
+.wlp .wlp-24:hover{background:#11519a !important;transform:translateY(-2px) !important}
+.wlp .wlp-25:hover{background:#f1f5f9 !important;color:#0f172a !important}
+.wlp .wlp-26:hover{background:#11519a !important}
+.wlp .wlp-27:hover{background:#f1f5f9 !important}
+.wlp .wlp-28:hover{color:#11519a !important}
+.wlp .wlp-29:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;color:#0f172a !important}
+.wlp .wlp-30:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;color:#0f172a !important}
+.wlp .wlp-31:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;color:#0f172a !important}
+.wlp .wlp-32:focus{border-color:#1565c0 !important;box-shadow:0 0 0 3px rgba(21,101,192,.15) !important}
+.wlp .wlp-33:focus{border-color:#1565c0 !important;box-shadow:0 0 0 3px rgba(21,101,192,.15) !important}
+.wlp .wlp-34:focus{border-color:#1565c0 !important;box-shadow:0 0 0 3px rgba(21,101,192,.15) !important}
+.wlp .wlp-35:focus{border-color:#1565c0 !important;box-shadow:0 0 0 3px rgba(21,101,192,.15) !important}
+.wlp .wlp-36:focus{border-color:#1565c0 !important;box-shadow:0 0 0 3px rgba(21,101,192,.15) !important}
+.wlp .wlp-37:focus{border-color:#1565c0 !important;box-shadow:0 0 0 3px rgba(21,101,192,.15) !important}
+.wlp .wlp-38:focus{border-color:#1565c0 !important;box-shadow:0 0 0 3px rgba(21,101,192,.15) !important}
+.wlp .wlp-39:hover{border-color:#1565c0 !important}
+.wlp .wlp-40:focus{border-color:#1565c0 !important;box-shadow:0 0 0 3px rgba(21,101,192,.15) !important}
+.wlp .wlp-41:hover{background:#11519a !important}
+.wlp .wlp-42:hover{background:#11519a !important}
