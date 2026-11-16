@@ -4,9 +4,12 @@ export const BLOG_POSTS = [
     title: "From Messages to Meaningful Relationships",
     excerpt: "Building the Intelligent Engagement Infrastructure for the Next Generation of Digital Ministry and Organizations.",
     date: "Sep 24, 2026",
-    author: "Turumba Team",
+    author: "Samson Usmael",
+    authorRole: "Chief Executive Officer",
     category: "Infrastructure",
-    imageUrl: "/blog-img-3.jpg",
+    imageUrl: "/blog/messages-to-relationships.jpg",
+    imageAlt: "Two young people in Lagos smiling as they share messages on their phones",
+    imagePosition: "50% 42%",
     content: `### **Executive Summary**
 
 Organizations have more ways than ever to communicate with people. WhatsApp, SMS, Telegram, email, Messenger, websites, and other digital channels have made it possible to reach millions.
@@ -159,9 +162,12 @@ The future is **connected, intelligent, adaptive, and human.**
     title: "Digital Infrastructure for Kingdom Collaboration",
     excerpt: "How Connected Intelligence Can Help the Global Church Build Meaningful Relationships at Scale.",
     date: "Sep 18, 2026",
-    author: "Turumba Team",
+    author: "Samson Usmael",
+    authorRole: "Chief Executive Officer",
     category: "Collaboration",
-    imageUrl: "/handshake.jpg",
+    imageUrl: "/partners/bgea-handshake.jpg",
+    imageAlt: "Turumba and the Billy Graham Evangelistic Association shaking hands at their partnership signing",
+    imagePosition: "50% 30%",
     content: `### **Executive Summary**
 
 The global Church has never had more opportunities to connect with people.
@@ -273,6 +279,8 @@ The Kingdom is bigger than one organization. The long-term opportunity is to ena
 
 ---
 
+![Turumba and Explore God holding their signed partnership agreement](/partners/explore-god-agreement.jpg "Turumba and Explore God sign a partnership agreement in Addis Ababa.")
+
 ## **Conclusion**
 
 The digital world has given the Church unprecedented reach.
@@ -298,9 +306,12 @@ We envision a world where the Church and mission-driven organizations have the d
     title: "We Need Better Infrastructure for Kingdom Collaboration",
     excerpt: "More reach is not enough. The Church has never had more ways to reach people, yet our journeys are still disconnected.",
     date: "Sep 10, 2026",
-    author: "Turumba Team",
+    author: "Samson Usmael",
+    authorRole: "Chief Executive Officer",
     category: "Infrastructure",
-    imageUrl: "/blog-img-1.jpg",
+    imageUrl: "/blog/kingdom-collaboration.jpg",
+    imageAlt: "A circle of hands meeting in the middle",
+    imagePosition: "50% 50%",
     content: `### **More reach is not enough.**
 
 The Church has never had more ways to reach people.
@@ -448,41 +459,5 @@ We are moving:
 This is the infrastructure we are working to build.
 
 **Turumba. Digital Infrastructure for Kingdom Collaboration.**`
-  },
-  {
-    id: "4",
-    title: "Scaling Church Management Systems Globally",
-    excerpt: "Discover the architectural patterns that allow modern ministry tools to operate seamlessly across different regions and languages.",
-    date: "Aug 30, 2026",
-    author: "Turumba Team",
-    category: "Infrastructure",
-    imageUrl: "/blog-img-2.jpg"
-  },
-  {
-    id: "5",
-    title: "The Role of Emerging Tech in Community Building",
-    excerpt: "How forward-thinking ministries are adopting new technologies to foster deeper relationships and engagement.",
-    date: "Aug 15, 2026",
-    author: "Eyosiya",
-    category: "Technology",
-    imageUrl: "/hero-bg-2.png"
-  },
-  {
-    id: "6",
-    title: "Security First: Protecting Global Ministry Data",
-    excerpt: "An overview of our commitment to enterprise-grade security and compliance for sensitive communication.",
-    date: "Jul 22, 2026",
-    author: "Turumba Team",
-    category: "Security",
-    imageUrl: "/hero-bg.jpg"
-  },
-  {
-    id: "7",
-    title: "Building Real-Time Connectivity at Scale",
-    excerpt: "The technical hurdles of delivering instant messaging capabilities to millions of concurrent users.",
-    date: "Jul 05, 2026",
-    author: "Eyosiya",
-    category: "Messaging",
-    imageUrl: "/blog-img-4.jpg"
   }
 ];

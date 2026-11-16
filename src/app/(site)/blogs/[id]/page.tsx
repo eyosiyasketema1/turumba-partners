@@ -4,15 +4,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Share2, Mail, Link as LinkIcon } from "lucide-react";
 import { motion, useScroll } from "framer-motion";
-import { use } from "react";
+import { use, useState } from "react";
+import { notFound } from "next/navigation";
 import { BLOG_POSTS } from "@/data/posts";
 
 export default function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
-  // Find the post, or default to the first one if not found
-  const post = BLOG_POSTS.find(p => p.id === resolvedParams.id) || BLOG_POSTS[0];
-
+  const [copied, setCopied] = useState(false);
   const { scrollYProgress } = useScroll();
+  const post = BLOG_POSTS.find(p => p.id === resolvedParams.id);
+  if (!post) notFound();
+  const more = BLOG_POSTS.filter(p => p.id !== post.id);
+
+  // share: native share sheet where available, email, copy link
+  const pageUrl = () => (typeof window !== "undefined" ? window.location.href : "");
+  const shareNative = async () => {
+    if (navigator.share) { try { await navigator.share({ title: post.title, text: post.excerpt, url: pageUrl() }); } catch { /* closed */ } }
+    else copyLink();
+  };
+  const copyLink = async () => {
+    try { await navigator.clipboard.writeText(pageUrl()); setCopied(true); window.setTimeout(() => setCopied(false), 2000); } catch { /* blocked */ }
+  };
 
   return (
     <div className="bg-[#F7F7F7] min-h-screen text-[#1A1A1A] selection:bg-[#1565C0] selection:text-white pb-32">
@@ -73,8 +85,11 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
         >
           <Image 
             src={post.imageUrl} 
-            alt={post.title} 
+            alt={post.imageAlt} 
             fill 
+            sizes="(min-width: 1152px) 1152px, 100vw"
+            quality={90}
+            style={{ objectPosition: post.imagePosition }}
             className="object-cover" 
             priority
           />
@@ -89,43 +104,30 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
               
               {/* Author Info */}
               <div className="flex flex-col">
-                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#8F8F8F] mb-3 lg:mb-4">Written By</h4>
+                <h4 className="text-[11px] font-bold uppercase tracking-widest text-[#8F8F8F] mb-3 lg:mb-4">Written By</h4>
                 <div className="flex items-center gap-3 md:gap-4">
                   {/* Circular Avatar */}
                   <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden bg-[#EEEEEE] shrink-0 border border-black/5">
-                    <Image 
-                      src={post.author === "Eyosiya" ? "/hero-bg-2.png" : "/blog-img-4.jpg"} 
-                      alt={post.author} 
-                      fill 
-                      className="object-cover grayscale hover:grayscale-0 transition-all duration-300"
-                    />
+                    <Image src="/partners/samson-usmael.jpg" alt="" fill sizes="48px" className="object-cover object-[50%_18%]" />
                   </div>
                   
                   {/* Name, Title, and Socials */}
                   <div className="flex flex-col">
                     <p className="font-bold text-black text-xs md:text-sm uppercase tracking-wide mb-0.5">{post.author}</p>
-                    <p className="text-[10px] md:text-[11px] text-[#707070] font-medium mb-1.5">{post.author === "Eyosiya" ? "Founder & CEO" : "Digital Ministry Team"}</p>
+                    <p className="text-[11px] md:text-[11px] text-[#707070] font-medium mb-1.5">{post.authorRole}</p>
                     
-                    {/* Socials */}
-                    <div className="flex items-center gap-2.5">
-                      <a href="#" className="text-[#8F8F8F] hover:text-black transition-colors" aria-label="X (Twitter)">
-                        <svg viewBox="0 0 24 24" className="w-3 h-3 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
-                      </a>
-                      <a href="#" className="text-[#8F8F8F] hover:text-[#0A66C2] transition-colors" aria-label="LinkedIn">
-                        <svg viewBox="0 0 24 24" className="w-3 h-3 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                      </a>
-                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Share Links */}
               <div>
-                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#8F8F8F] mb-3 lg:mb-4">Share Article</h4>
+                <h4 className="text-[11px] font-bold uppercase tracking-widest text-[#8F8F8F] mb-3 lg:mb-4">Share Article</h4>
                 <div className="flex items-center gap-3 lg:gap-4 text-[#8F8F8F]">
-                  <button className="hover:text-[#1565C0] transition-colors"><Share2 className="w-4 h-4 md:w-5 md:h-5" /></button>
-                  <button className="hover:text-[#1565C0] transition-colors"><Mail className="w-4 h-4 md:w-5 md:h-5" /></button>
-                  <button className="hover:text-black transition-colors"><LinkIcon className="w-4 h-4 md:w-5 md:h-5" /></button>
+                  <button type="button" onClick={shareNative} aria-label="Share this article" className="hover:text-[#1565C0] transition-colors"><Share2 className="w-4 h-4 md:w-5 md:h-5" /></button>
+                  <a href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(post.excerpt + "\n\n")}`} onClick={(e) => { e.currentTarget.href = `mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(post.excerpt + "\n\n" + pageUrl())}`; }} aria-label="Share by email" className="hover:text-[#1565C0] transition-colors"><Mail className="w-4 h-4 md:w-5 md:h-5" /></a>
+                  <button type="button" onClick={copyLink} aria-label="Copy link" className="hover:text-black transition-colors"><LinkIcon className="w-4 h-4 md:w-5 md:h-5" /></button>
+                  {copied && <span className="text-[11px] font-bold uppercase tracking-widest text-[#1565C0]">Copied</span>}
                 </div>
               </div>
 
@@ -159,7 +161,11 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
                   });
                 };
 
-                const blocks = post.content.split('\n\n').filter(Boolean);
+                // a heading written directly above its paragraph (no blank line) becomes its own block
+                const blocks = post.content.split('\n\n').filter(Boolean).flatMap((b) => {
+                  const nl = b.indexOf('\n');
+                  return /^#{2,3}\s/.test(b) && nl > 0 ? [b.slice(0, nl), b.slice(nl + 1).trim()].filter(Boolean) : [b];
+                });
                 
                 return blocks.map((block, index) => {
                   const key = index;
@@ -185,6 +191,19 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
                         ))}
                       </ul>
                     );
+                  } else if (block.startsWith('![')) {
+                    const m = block.match(/^!\[([^\]]*)\]\(([^\s)]+)(?:\s+"([^"]*)")?\)/);
+                    if (m) {
+                      return (
+                        <figure key={key} className="my-12 md:my-16 -mx-0 md:-mx-8">
+                          <div className="relative w-full aspect-[3/2] rounded-[12px] overflow-hidden bg-[#E5E5E5]">
+                            <Image src={m[2]} alt={m[1]} fill sizes="(min-width: 768px) 760px, 100vw" quality={90} className="object-cover" />
+                          </div>
+                          {m[3] && <figcaption className="mt-3 text-[13px] md:text-sm text-[#707070] font-normal">{m[3]}</figcaption>}
+                        </figure>
+                      );
+                    }
+                    return <p key={key}>{parseInline(block)}</p>;
                   } else if (block === '---') {
                     return <hr key={key} className="my-16 border-t border-black/10" />;
                   } else {
@@ -203,6 +222,32 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
           </motion.div>
 
         </div>
+
+        {/* More articles */}
+        {more.length > 0 && (
+          <section aria-labelledby="more-articles" className="max-w-6xl mx-auto mt-24 md:mt-32 pt-12 border-t border-black/10">
+            <h2 id="more-articles" className="flex items-center gap-3 text-black font-semibold tracking-widest uppercase text-sm mb-10">
+              <span className="w-2.5 h-2.5 bg-black rounded-full"></span>
+              More articles
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+              {more.map((p) => (
+                <Link key={p.id} href={`/blogs/${p.id}`} className="group flex flex-col">
+                  <div className="relative w-full aspect-[16/10] rounded-[6px] overflow-hidden bg-[#E5E5E5] mb-5">
+                    <Image src={p.imageUrl} alt={p.imageAlt} fill sizes="(min-width: 768px) 50vw, 100vw" style={{ objectPosition: p.imagePosition }} className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
+                  </div>
+                  <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#707070] mb-3">
+                    <span>{p.date}</span>
+                    <span className="text-[#C7C7C7]">/</span>
+                    <span className="border border-black/20 px-2 py-0.5 rounded-full text-black">{p.category}</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-black text-black uppercase tracking-tight leading-[1.1] mb-3 group-hover:text-[#1565C0] transition-colors">{p.title}</h3>
+                  <p className="text-[#707070] text-[15px] font-light line-clamp-2 leading-relaxed">{p.excerpt}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </article>
 
     </div>

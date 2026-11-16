@@ -213,3 +213,15 @@ html:has(.turumba-home) { scroll-behavior: smooth; }
 @media (max-width: 899.98px) {
   .turumba-home [data-rs="pill"] { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: rgba(255, 255, 255, 0.12) !important; }
 }
+
+/* partners strip */
+.turumba-home .th-partners-row { display: flex; align-items: center; justify-content: space-between; gap: 32px 64px; flex-wrap: wrap; max-width: 1392px; margin: 0 auto; }
+.turumba-home .th-partners-logos { display: flex; align-items: center; gap: 72px; flex-wrap: wrap; }
+.turumba-home .th-partner { display: block; opacity: 0.85; transition: opacity 0.2s; }
+.turumba-home .th-partner:hover { opacity: 1; }
+@media (max-width: 899.98px) {
+  .turumba-home .th-partners { padding-top: 40px !important; padding-bottom: 40px !important; }
+  .turumba-home .th-partners-row { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .turumba-home .th-partners-logos { gap: 40px; }
+  .turumba-home .th-partner img { height: 34px !important; }
+}

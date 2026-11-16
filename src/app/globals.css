@@ -51,3 +51,12 @@ body {
 ::selection {
   background: rgba(21, 101, 192, 0.22);
 }
+
+/* animated buttons (src/components/ui/animated-button.tsx): hover colour comes from the button's tone */
+.tb-animated:hover { background: var(--tb-hover) !important; }
+
+/* film grain for photo overlays (blog feature image) */
+.blog-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 1.4 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}

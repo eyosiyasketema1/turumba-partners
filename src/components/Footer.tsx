@@ -1,8 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import AnimatedButton from '@/components/ui/animated-button';
 
-export default function Footer({ hideDemo = false }: { hideDemo?: boolean } = {}) {
+export default function Footer() {
   return (
     <footer className="w-full bg-white text-black pt-32 pb-10">
       <div className="max-w-[1440px] mx-auto w-full px-6">
@@ -19,18 +20,13 @@ export default function Footer({ hideDemo = false }: { hideDemo?: boolean } = {}
           </h2>
 
           <div className="flex flex-col sm:flex-row items-center gap-4">
-            <button className="bg-[#1565C0] hover:bg-[#11519A] transition-colors text-white font-medium py-3.5 px-7 rounded-full text-[15px] flex items-center gap-2">
-              Start now for free 
+            <AnimatedButton>
+              Start Now
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.33334 8H12.6667" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M8 3.33334L12.6667 8.00001L8 12.6667" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-            </button>
-            {!hideDemo && (
-            <button className="bg-white border border-[#E5E5E5] hover:border-[#C7C7C7] transition-colors text-[#1A1A1A] font-medium py-3.5 px-7 rounded-full text-[15px]">
-              Request a demo
-            </button>
-            )}
+            </AnimatedButton>
           </div>
         </div>
 

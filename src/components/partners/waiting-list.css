@@ -16,33 +16,23 @@
 @keyframes om-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes om-sheen{from{opacity:0}40%{opacity:.5}to{opacity:0}}
 
-.wlp .wlp-1:hover{background:#11519a !important;transform:translateY(-2px) !important}
-.wlp .wlp-2:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
-.wlp .wlp-3:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
-.wlp .wlp-4:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
-.wlp .wlp-5:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
-.wlp .wlp-6:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
-.wlp .wlp-7:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
-.wlp .wlp-8:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
-.wlp .wlp-9:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
-.wlp .wlp-10:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
-.wlp .wlp-11:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;box-shadow:0 8px 20px -14px rgba(15,23,42,.4) !important}
+.wlp .wlp-1:hover{background:#11519a !important}
 .wlp .wlp-12:hover{border-color:rgba(21,101,192,.6) !important;transform:translateY(-3px) !important}
 .wlp .wlp-13:hover{border-color:rgba(21,101,192,.6) !important;transform:translateY(-3px) !important}
 .wlp .wlp-14:hover{border-color:rgba(21,101,192,.6) !important;transform:translateY(-3px) !important}
 .wlp .wlp-15:hover{border-color:rgba(21,101,192,.6) !important;transform:translateY(-3px) !important}
 .wlp .wlp-16:hover{border-color:rgba(21,101,192,.6) !important;transform:translateY(-3px) !important}
 .wlp .wlp-17:hover{border-color:rgba(21,101,192,.6) !important;transform:translateY(-3px) !important}
-.wlp .wlp-18:hover{background:#11519a !important;transform:translateY(-2px) !important}
-.wlp .wlp-19:hover{border-color:#1565c0 !important;box-shadow:0 14px 34px -22px rgba(15,23,42,.5) !important;transform:translateY(-3px) !important}
-.wlp .wlp-20:hover{border-color:#1565c0 !important;box-shadow:0 14px 34px -22px rgba(15,23,42,.5) !important;transform:translateY(-3px) !important}
-.wlp .wlp-21:hover{border-color:#1565c0 !important;box-shadow:0 14px 34px -22px rgba(15,23,42,.5) !important;transform:translateY(-3px) !important}
-.wlp .wlp-22:hover{border-color:#1565c0 !important;box-shadow:0 14px 34px -22px rgba(15,23,42,.5) !important;transform:translateY(-3px) !important}
-.wlp .wlp-23:hover{background:#11519a !important;transform:translateY(-2px) !important}
-.wlp .wlp-24:hover{background:#11519a !important;transform:translateY(-2px) !important}
+.wlp .wlp-18:hover{background:#11519a !important}
+.wlp .wlp-19:hover{border-color:#1565c0 !important;transform:translateY(-3px) !important}
+.wlp .wlp-20:hover{border-color:#1565c0 !important;transform:translateY(-3px) !important}
+.wlp .wlp-21:hover{border-color:#1565c0 !important;transform:translateY(-3px) !important}
+.wlp .wlp-22:hover{border-color:#1565c0 !important;transform:translateY(-3px) !important}
+.wlp .wlp-23:hover{background:#e7eff9 !important}
+.wlp .wlp-24:hover{background:#11519a !important}
 .wlp .wlp-25:hover{background:#f1f5f9 !important;color:#0f172a !important}
 .wlp .wlp-26:hover{background:#11519a !important}
-.wlp .wlp-27:hover{background:#f1f5f9 !important}
+.wlp .wlp-27:hover{background:rgba(0,0,0,.05) !important}
 .wlp .wlp-28:hover{color:#11519a !important}
 .wlp .wlp-29:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;color:#0f172a !important}
 .wlp .wlp-30:hover{border-color:#1565c0 !important;transform:translateY(-2px) !important;color:#0f172a !important}
@@ -58,3 +48,89 @@
 .wlp .wlp-40:focus{border-color:#1565c0 !important;box-shadow:0 0 0 3px rgba(21,101,192,.15) !important}
 .wlp .wlp-41:hover{background:#11519a !important}
 .wlp .wlp-42:hover{background:#11519a !important}
+
+/* hero carousel indicator: fills over the slide's time on screen */
+@keyframes wlp-slide{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* bento grids: "We are looking to connect with" (light) and "By joining the waiting list, you can" (dark) */
+.wlp .wlp-bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(148px,auto);gap:12px}
+.wlp .wlp-bento--ben{gap:14px;grid-auto-rows:minmax(168px,auto)}
+.wlp .wlp-tile{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:28px;border-radius:12px;padding:22px 24px;transition:border-color .18s ease-out,transform .18s ease-out,box-shadow .18s ease-out,background .18s ease-out}
+.wlp .wlp-tile--feature{grid-column:span 2;grid-row:span 2;padding:32px}
+.wlp .wlp-tile--wide{grid-column:span 2}
+.wlp .wlp-tile-ico{width:44px;height:44px;flex:none;display:grid;place-items:center;border-radius:10px}
+.wlp .wlp-tile--feature .wlp-tile-ico{width:56px;height:56px;border-radius:12px}
+.wlp .wlp-tile-label{font-size:17px;line-height:1.4;font-weight:500;letter-spacing:-.005em;text-wrap:pretty}
+.wlp .wlp-tile--feature .wlp-tile-label{font-size:clamp(24px,2.4vw,32px);line-height:1.15;font-weight:700;letter-spacing:-.02em;max-width:16ch}
+/* light tiles (audience): tap to start the form */
+.wlp .wlp-tile--light{background:#f7f7f7;border:none;color:#1a1a1a;cursor:pointer}
+.wlp .wlp-tile--light .wlp-tile-ico{background:#fff;color:#1565c0}
+/* lead tile: the home page "Help shape what comes next" gradient + brand pattern */
+.wlp .wlp-tile--light.wlp-tile--feature{overflow:hidden;isolation:isolate;color:#fff;background:radial-gradient(60% 70% at 100% 0%,#3a00c8 0%,rgba(58,0,200,0) 100%),radial-gradient(55% 60% at 100% 100%,#03e6ff 0%,rgba(3,230,255,0) 100%),linear-gradient(160deg,#2a45b8 0%,#1c4bd1 50%,#1565c0 100%)}
+.wlp .wlp-tile--light.wlp-tile--feature::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:url("/brand/pattern-white.svg") center / 1400px auto repeat;opacity:.16}
+.wlp .wlp-tile--light.wlp-tile--feature > *{position:relative;z-index:1}
+.wlp .wlp-tile--light.wlp-tile--feature .wlp-tile-ico{background:rgba(255,255,255,.16);color:#fff}
+.wlp .wlp-tile--light:hover{transform:translateY(-2px);background:#eef3fa}
+.wlp .wlp-tile--light.wlp-tile--feature:hover{background:radial-gradient(60% 70% at 100% 0%,#3a00c8 0%,rgba(58,0,200,0) 100%),radial-gradient(55% 60% at 100% 100%,#03e6ff 0%,rgba(3,230,255,0) 100%),linear-gradient(160deg,#2a45b8 0%,#1c4bd1 50%,#1565c0 100%);filter:brightness(1.08)}
+.wlp .wlp-tile--light::after{content:"\2192";position:absolute;top:22px;right:24px;font-size:18px;color:#1565c0;opacity:0;transform:translateX(-4px);transition:opacity .18s,transform .18s}
+.wlp .wlp-tile--light.wlp-tile--feature::after{color:#fff;top:32px;right:32px;z-index:1}
+.wlp .wlp-tile--light:hover::after,.wlp .wlp-tile--light:focus-visible::after{opacity:1;transform:none}
+/* dark tiles (benefits) */
+.wlp .wlp-tile--dark{background:#061e3a;border:1px solid #0d3d73;color:#e2e8f0}
+.wlp .wlp-tile--dark .wlp-tile-ico{background:rgba(21,101,192,.15);border:1px solid rgba(21,101,192,.4);color:#a1c1e6}
+.wlp .wlp-tile--dark.wlp-tile--feature{background:linear-gradient(150deg,#0e3d78,#072448 70%);border-color:#1d5aa3;color:#fff}
+.wlp .wlp-tile--dark.wlp-tile--feature .wlp-tile-ico{background:#1565c0;border-color:#1565c0;color:#fff}
+.wlp .wlp-tile--dark:hover{border-color:#4484cd;transform:translateY(-2px)}
+@media (max-width:1023.98px){
+  .wlp .wlp-bento{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .wlp .wlp-tile--feature{grid-row:span 1}
+}
+@media (max-width:639.98px){
+  .wlp .wlp-bento{grid-template-columns:minmax(0,1fr);grid-auto-rows:auto}
+  .wlp .wlp-tile,.wlp .wlp-tile--feature,.wlp .wlp-tile--wide{grid-column:auto;grid-row:auto}
+  .wlp .wlp-tile{flex-direction:row;align-items:center;justify-content:flex-start;gap:16px;padding:16px 18px}
+  .wlp .wlp-tile--feature{flex-direction:column;align-items:flex-start;gap:28px;padding:24px}
+  .wlp .wlp-tile--light::after{display:none}
+}
+
+/* early-access panel: the home page "Help shape what comes next" gradient + brand pattern */
+.wlp .wlp-cta-panel{isolation:isolate;background:radial-gradient(60% 70% at 100% 0%,#3a00c8 0%,rgba(58,0,200,0) 100%),radial-gradient(55% 60% at 100% 100%,#03e6ff 0%,rgba(3,230,255,0) 100%),linear-gradient(160deg,#2a45b8 0%,#1c4bd1 50%,#1565c0 100%)}
+.wlp .wlp-cta-panel::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:url("/brand/pattern-white.svg") center / 1400px auto repeat;opacity:.16}
+.wlp .wlp-cta-panel > *{position:relative;z-index:1}
+
+
+/* hero carousel: left / right halves of the photo step back / forward */
+.wlp .wlp-car-zone{position:absolute;top:0;bottom:0;width:50%;padding:0;border:0;background:transparent;z-index:1;-webkit-tap-highlight-color:transparent}
+.wlp .wlp-car-zone--prev{left:0;cursor:w-resize}
+.wlp .wlp-car-zone--next{right:0;cursor:e-resize}
+.wlp .wlp-car-zone:focus-visible{outline:2px solid #fff;outline-offset:-6px;border-radius:8px}
+
+/* slide-up bar: on narrow phones show just the logo and the button */
+@media (max-width:519.98px){.wlp .wlp-sticky-text{display:none !important}}
+
+/* "Built for Partnership" — CEO note (Figma frame 1000002463; Inter → DM Sans, #2563EB → Blue Ocean) */
+.wlp .wlp-bfp{background:#f7f7f7;border-radius:16px;display:grid;grid-template-columns:minmax(0,560px) minmax(0,421px);justify-content:space-between;gap:48px;padding:64px clamp(40px,6vw,96px) 72px clamp(40px,5vw,67px)}
+.wlp .wlp-bfp-eyebrow{font-size:14px;line-height:17px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:#646464}
+.wlp .wlp-bfp-title{margin:13px 0 0;font-size:40px;line-height:48px;font-weight:400;letter-spacing:-.04em;color:#1565c0}
+.wlp .wlp-bfp-body{margin-top:23px;font-size:16px;line-height:1.55;color:#737373}
+.wlp .wlp-bfp-body p{margin:0 0 14px}
+.wlp .wlp-bfp-body .wlp-bfp-close{margin:0;color:#1a1a1a;font-weight:500}
+.wlp .wlp-bfp-side{display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding-top:37px}
+.wlp .wlp-bfp-photo{display:block;width:100%;aspect-ratio:421/460;object-fit:cover;object-position:50% 18%;border-radius:12px;background:#111}
+.wlp .wlp-bfp-art{margin:0;font-family:"Roboto Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace !important;font-size:7px;line-height:9px;color:#1565c0;white-space:pre;overflow:hidden;user-select:none;transform:scaleX(-1)}
+.wlp .wlp-bfp-sign{display:flex;align-items:center;gap:11px}
+.wlp .wlp-bfp-bar{width:14px;height:40px;flex:none;background:#1565c0}
+.wlp .wlp-bfp-name{display:block;font-size:16px;line-height:19px;font-weight:500;color:#000}
+.wlp .wlp-bfp-role{display:block;margin-top:4px;font-size:14px;line-height:17px;color:#939393}
+@media (max-width:1023.98px){
+  .wlp .wlp-bfp{grid-template-columns:minmax(0,1fr);padding:48px 40px 52px;gap:36px}
+  .wlp .wlp-bfp-side{padding-top:0;align-items:flex-start}
+  .wlp .wlp-bfp-photo{order:2;max-width:420px;aspect-ratio:4/5}
+  .wlp .wlp-bfp-art{order:2;align-self:center;font-size:min(7px,calc((100vw - 128px) / 60));line-height:1.28}
+  .wlp .wlp-bfp-sign{order:1}
+}
+@media (max-width:639.98px){
+  .wlp .wlp-bfp{padding:32px 20px 36px;border-radius:12px}
+  .wlp .wlp-bfp-title{font-size:32px;line-height:38px}
+  .wlp .wlp-bfp-art{font-size:calc((100vw - 88px) / 60)}
+}

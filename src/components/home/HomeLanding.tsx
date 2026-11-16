@@ -5,7 +5,8 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import WaitingListModal from "@/components/WaitingListModal";
-import { Badge, Button, Icon } from "./ds";
+import { Badge, Icon } from "./ds";
+import AnimatedButton from "@/components/ui/animated-button";
 import { Reveal } from "./Reveal";
 import { TurumbaHero, TurumbaJourneyStrip, TurumbaWordCycle } from "./TurumbaHero";
 import { VisionPlayer } from "./VisionPlayer";
@@ -69,6 +70,12 @@ const slideUp = (delay: number) => ({
 
 const openWaitingList = () => window.dispatchEvent(new Event("open-waiting-list"));
 
+/* partner organizations shown under the story */
+const PARTNERS = [
+  { name: "Billy Graham Evangelistic Association", href: "https://billygraham.org/", logo: "/partners/logos/billy-graham-evangelistic-association.svg", h: 44 },
+  { name: "Explore God", href: "https://exploregod.com/", logo: "/partners/logos/explore-god.svg", h: 48 },
+];
+
 export default function HomeLanding() {
   // partners-page hero motion: lines slide up from behind a mask, and the copy drifts down slower than the page on scroll
   const heroRef = useRef<HTMLElement>(null);
@@ -105,7 +112,7 @@ export default function HomeLanding() {
             </div>
             <div className="th-mask" style={{ padding: 2, margin: "46px -2px -2px" }}>
               <motion.div data-rs="wrap" {...slideUp(0.5)} style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                <Button variant="primary" size="lg" iconAfter="ArrowRight">Start now for free</Button>
+                <AnimatedButton height={44} padX={24}>Start Now <Icon name="ArrowRight" size={16} /></AnimatedButton>
                 <a href="#vision" className="th-ghost-btn" style={{ display: "inline-flex", alignItems: "center", gap: 10, height: 44, padding: "0 24px", borderRadius: 9999, border: "1px solid rgba(255,255,255,0.4)", color: "#ffffff", fontSize: 15, fontWeight: 500 }}>
                   <Icon name="Play" size={16} />
                   Watch the vision
@@ -131,6 +138,20 @@ export default function HomeLanding() {
       {/* The story, on scroll */}
       <section id="story" data-screen-label="The story" style={{ position: "relative", background: "#041426" }}>
         <TurumbaStory />
+      </section>
+
+      {/* Partners */}
+      <section id="partners" data-screen-label="Partners" aria-label="Our partners" className="th-partners" style={{ padding: "56px var(--th-gutter)", borderBottom: "1px solid #e5e5e5", background: "#ffffff" }}>
+        <div className="th-partners-row">
+          <div style={eyebrow("#707070")}>In partnership with</div>
+          <div className="th-partners-logos">
+            {PARTNERS.map((p) => (
+              <a key={p.href} href={p.href} target="_blank" rel="noopener noreferrer" className="th-partner" title={p.name}>
+                <img src={p.logo} alt={p.name} style={{ height: p.h, width: "auto", display: "block" }} />
+              </a>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Why */}
@@ -265,7 +286,7 @@ export default function HomeLanding() {
             We are inviting builders, ministries, churches, innovators, technology partners, and Kingdom organizations to join us. Get early access, help shape the platform, explore collaboration.
           </p>
           <div style={{ marginTop: 40 }}>
-            <Button variant="inverse" size="lg" iconAfter="ArrowRight" onClick={openWaitingList} style={{ height: 56, padding: "0 32px", fontSize: 17, fontWeight: 600, boxShadow: "none" }}>Join the waiting list</Button>
+            <AnimatedButton tone="inverse" height={56} padX={32} onClick={openWaitingList} style={{ fontSize: 17, fontWeight: 600 }}>Join the waiting list <Icon name="ArrowRight" size={16} /></AnimatedButton>
           </div>
           <figure style={{ margin: "72px 0 0", paddingTop: 28, borderTop: "1px solid rgba(255,255,255,0.18)", maxWidth: 620 }}>
             <blockquote style={{ margin: 0, fontSize: 16, lineHeight: 1.6, fontStyle: "italic", fontWeight: 400, color: "rgba(255,255,255,0.72)", textWrap: "pretty" }}>

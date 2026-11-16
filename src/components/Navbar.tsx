@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import AnimatedButton from "@/components/ui/animated-button";
 
 /* One navbar for the whole site: home sections + blog + partners. */
 const LINKS: { href: string; label: string; match?: (p: string) => boolean }[] = [
@@ -106,9 +107,9 @@ export default function Navbar() {
               </button>
 
               {/* Craft Button */}
-              <button className="hidden sm:flex flex-row justify-center items-center px-5 py-[10px] gap-[8px] h-[40px] bg-[#1565C0] shadow-[0px_1px_2px_rgba(0,0,0,0.05)] rounded-full text-white text-[15px] font-medium transition-colors hover:bg-[#11519A] whitespace-nowrap">
-                Start now for free
-              </button>
+              <span className="hidden sm:inline-flex">
+                <AnimatedButton height={40} padX={20}>Start Now</AnimatedButton>
+              </span>
 
               {/* Menu toggle (below xl) */}
               <button
@@ -144,7 +145,7 @@ export default function Navbar() {
             })}
             <div className="sm:hidden mt-4 flex flex-col gap-3">
               <button className="px-6 py-[10px] rounded-full border border-black/20 text-[15px]">Sign in</button>
-              <button className="px-6 py-[10px] rounded-full bg-[#1565C0] text-white text-[15px] font-medium">Start now for free</button>
+              <AnimatedButton height={44} padX={24}>Start Now</AnimatedButton>
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@ export default function Home() {
       <Navbar />
       <HomeLanding />
       {/* the same footer as the partners page and blog */}
-      <Footer hideDemo />
+      <Footer />
     </>
   );
 }

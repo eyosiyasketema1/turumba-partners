@@ -16,17 +16,17 @@ export default function BlogsPage() {
     <div className="bg-[#F7F7F7] min-h-screen text-[#1A1A1A] flex flex-col">
 
       {/* Spacer for fixed navbar */}
-      <div className="pt-32 pb-16 px-6 max-w-[1440px] mx-auto w-full flex-grow">
+      <div className="pt-28 md:pt-28 pb-16 px-6 max-w-[1440px] mx-auto w-full flex-grow">
         
         {/* Header Section (Editorial Style) */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-8 mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-8 mb-8">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-[52px] sm:text-[64px] md:text-[80px] lg:text-[110px] leading-[0.9] font-medium tracking-tight uppercase text-black"
+            className="text-[44px] sm:text-[56px] md:text-[64px] lg:text-[72px] leading-[0.92] font-medium tracking-tight uppercase text-black"
           >
-            Insights &<br/>Updates
+            Insights &<br className="lg:hidden" /> Updates
           </motion.h1>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -37,7 +37,7 @@ export default function BlogsPage() {
             <p className="text-[#707070] text-[15px] font-light mb-4">
               Thoughts, stories, and ideas on digital infrastructure, messaging, and building the future of ministry technology.
             </p>
-            <Link href="#other-articles" className="inline-flex items-center gap-2 text-[13px] font-medium text-[#2B2A2A] hover:text-black transition-colors border-b border-[#C7C7C7] pb-1 uppercase tracking-wider">
+            <Link href="#latest-posts" className="inline-flex items-center gap-2 text-[13px] font-medium text-[#2B2A2A] hover:text-black transition-colors border-b border-[#C7C7C7] pb-1 uppercase tracking-wider">
               Explore Articles <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </motion.div>
@@ -48,49 +48,59 @@ export default function BlogsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-32 flex flex-col group cursor-pointer"
+          className="mb-20 md:mb-32 flex flex-col group cursor-pointer"
         >
           <Link href={`/blogs/${featuredPost.id}`}>
             {/* Massive Featured Image */}
-            <div className="relative w-full h-[400px] md:h-[500px] lg:h-[650px] rounded-[6px] overflow-hidden mb-12 shadow-sm">
+            <div className="blog-feature relative w-full aspect-[4/3] sm:aspect-[16/9] lg:aspect-auto lg:h-[min(470px,calc(100svh-460px))] lg:min-h-[320px] rounded-[16px] overflow-hidden mb-8 md:mb-10 bg-[#E5E5E5]">
               <Image
                 src={featuredPost.imageUrl}
-                alt={featuredPost.title}
+                alt={featuredPost.imageAlt}
                 fill
+                sizes="(min-width: 1440px) 1392px, 100vw"
+                quality={90}
+                style={{ objectPosition: featuredPost.imagePosition }}
                 className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
                 priority
               />
+              {/* brand pattern and a soft edge so the photo sits in the Turumba look */}
+              <div aria-hidden className="absolute inset-0 pointer-events-none bg-[url('/brand/pattern-white.svg')] bg-[length:1400px_auto] bg-center opacity-[0.18] mix-blend-overlay" />
+              <div aria-hidden className="absolute inset-0 pointer-events-none bg-[radial-gradient(120%_90%_at_50%_45%,rgba(4,20,38,0)_55%,rgba(4,20,38,0.35)_100%)]" />
+              {/* Blue Ocean tint, stronger toward the corner, and a fine film grain */}
+              <div aria-hidden className="absolute inset-0 pointer-events-none mix-blend-color bg-[linear-gradient(135deg,rgba(21,101,192,0.04)_0%,rgba(21,101,192,0.10)_45%,rgba(21,101,192,0.28)_100%)]" />
+              <div aria-hidden className="absolute inset-0 pointer-events-none mix-blend-soft-light bg-[linear-gradient(160deg,rgba(28,75,209,0)_35%,rgba(21,101,192,0.45)_100%)]" />
+              <div aria-hidden className="blog-grain absolute inset-0 pointer-events-none opacity-[0.22] mix-blend-overlay" />
             </div>
             
             {/* Featured Post Details Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start">
               
               {/* Left Side: Title & Meta */}
               <div className="md:col-span-7 flex flex-col pr-0 md:pr-12">
-                <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-[#707070] font-medium mb-6">
+                <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-[#707070] font-medium mb-4">
                   <span className="w-2 h-2 rounded-full bg-[#1565C0]"></span>
                   {featuredPost.category}
                 </div>
-                <h2 className="text-4xl md:text-5xl lg:text-[56px] leading-[1.1] font-medium tracking-tight mb-6 text-black group-hover:text-[#1565C0] transition-colors">
+                <h2 className="text-[32px] md:text-5xl lg:text-[46px] leading-[1.08] font-medium tracking-tight mb-4 md:mb-6 text-black group-hover:text-[#1565C0] transition-colors">
                   {featuredPost.title}
                 </h2>
               </div>
               
               {/* Right Side: Excerpt & CTA */}
-              <div className="md:col-span-5 flex flex-col md:pt-10">
-                <p className="text-[#707070] text-lg font-light leading-relaxed mb-8">
+              <div className="md:col-span-5 flex flex-col md:pt-8">
+                <p className="text-[#707070] text-base md:text-lg font-light leading-relaxed mb-6 md:mb-8">
                   {featuredPost.excerpt}
                 </p>
                 
                 {/* Meta details (Dates & Writer) */}
-                <div className="flex items-center gap-6 text-sm text-[#707070] font-light mb-8">
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[#707070] font-light mb-6 md:mb-8">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
                     <span>{featuredPost.date}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <User className="w-4 h-4" />
-                    <span>{featuredPost.author}</span>
+                    <span>{featuredPost.author}, {featuredPost.authorRole}</span>
                   </div>
                 </div>
 
@@ -104,23 +114,10 @@ export default function BlogsPage() {
         </motion.div>
 
         {/* Latest Posts Header */}
-        <div id="latest-posts" className="flex justify-between items-center border-t border-black/10 pt-16 mb-8">
+        <div id="latest-posts" className="flex justify-between items-center border-t border-black/10 pt-16 mb-12">
           <div className="flex items-center gap-3 text-black font-semibold tracking-widest uppercase text-sm">
             <span className="w-2.5 h-2.5 bg-black rounded-full"></span>
             Latest Posts
-          </div>
-        </div>
-
-        {/* Filters */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 text-[11px] font-bold uppercase tracking-widest text-black gap-6">
-          <div className="flex items-center gap-4 flex-wrap">
-            <span className="text-[#707070]">Filter by category:</span>
-            <div className="flex gap-2 flex-wrap">
-              <button className="bg-black text-white px-4 py-1.5 rounded-full">All</button>
-              <button className="border border-black/20 px-4 py-1.5 rounded-full hover:border-black transition-colors">Infrastructure</button>
-              <button className="border border-black/20 px-4 py-1.5 rounded-full hover:border-black transition-colors">Collaboration</button>
-              <button className="border border-black/20 px-4 py-1.5 rounded-full hover:border-black transition-colors">Messaging</button>
-            </div>
           </div>
         </div>
 
@@ -128,26 +125,9 @@ export default function BlogsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-16">
           {otherPosts.map((post, index) => {
             // Determine column span based on index to create 1/3 and 2/3 dynamic layouts
-            const spanClasses = [
-              "lg:col-span-8", // 2/3
-              "lg:col-span-4", // 1/3
-              "lg:col-span-4", // 1/3
-              "lg:col-span-8", // 2/3
-              "lg:col-span-6", // 1/2
-              "lg:col-span-6"  // 1/2
-            ];
-            
-            const aspectClasses = [
-              "aspect-[16/9] lg:aspect-auto lg:flex-1 lg:min-h-[280px]", // Wide: grows to match the taller neighbour
-              "aspect-[4/5] lg:aspect-[3/4]",  // Tall
-              "aspect-[4/5] lg:aspect-[3/4]",  // Tall
-              "aspect-[16/9] lg:aspect-auto lg:flex-1 lg:min-h-[280px]", // Wide: grows to match the taller neighbour
-              "aspect-[4/3]",                  // Standard
-              "aspect-[4/3]"                   // Standard
-            ];
-
-            const gridClass = spanClasses[index % spanClasses.length];
-            const aspectClass = aspectClasses[index % aspectClasses.length];
+            // two articles: side by side, same shape
+            const gridClass = "lg:col-span-6";
+            const aspectClass = "aspect-[4/3]";
 
             return (
               <motion.div
@@ -163,8 +143,10 @@ export default function BlogsPage() {
                   <div className={`relative w-full ${aspectClass} rounded-[6px] overflow-hidden bg-[#E5E5E5] mb-6`}>
                     <Image
                       src={post.imageUrl}
-                      alt={post.title}
+                      alt={post.imageAlt}
                       fill
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      style={{ objectPosition: post.imagePosition }}
                       className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
                     />
                   </div>
@@ -172,7 +154,7 @@ export default function BlogsPage() {
                   {/* Content */}
                   <div className="flex flex-col">
                     {/* Meta Data */}
-                    <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#707070] mb-3">
+                    <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#707070] mb-3">
                       <span>{post.date}</span>
                       <span className="text-[#C7C7C7]">/</span>
                       <span className="border border-black/20 px-2 py-0.5 rounded-full text-black">
